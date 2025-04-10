@@ -1,4 +1,4 @@
-# simple-nav-system
+# Simple Navigation System for BTT
 
 ![Banner](docs/bike.png)
 
@@ -36,4 +36,3 @@ O desenvolvimento do projeto vai exigir uma escolha ponderada dos componentes de
 - Desenvolvimento da interface: Para ter uma interface de fácil leitura e para o sistema consumir pouca energia, é necessário fazer uma escolha viável do display. Critérios como visibilidade, consumo de energia e a responsividade serão importantes na seleção do componente.
 
 - Autonomia: Como o sistema será utilizado em bicicletas, a autonomia da bateria é algo muito importante. O microcontrolador e os sensores devem operar com baixo consumo de energia, e a alimentação poderá ser feita por baterias de iões de lítio recarregáveis.
->>>>>>> 28585bc0d720bdfaeaba4c1eff0cd71d834ceda3

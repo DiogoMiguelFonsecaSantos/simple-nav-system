@@ -1,4 +1,4 @@
-# simple-nav-system
+# Simple Navigation System for BTT
 
 ![Banner](docs/bike.png)
 

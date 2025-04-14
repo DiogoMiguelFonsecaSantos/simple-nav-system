@@ -3,7 +3,7 @@
 #include "freertos/task.h"
 #include "led.h"
 
-#define DELAY_MS          5000
+#define DELAY_MS          500
 #define GPIO_LED          26
 
 void app_main(void)

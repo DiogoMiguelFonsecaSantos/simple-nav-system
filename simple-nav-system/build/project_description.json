@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "SimpleNavSys",
-    "project_version":    "d1b5fc2-dirty",
+    "project_version":    "cb977ac-dirty",
     "project_path":       "D:/Workshop/SNS/simple-nav-system",
     "idf_path":           "A:/Espressif/frameworks/esp-idf-v5.3.1",
     "build_dir":          "D:/Workshop/SNS/simple-nav-system/build",
@@ -55,7 +55,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "D:/Workshop/SNS/simple-nav-system/build/esp-idf/MyHAL/libMyHAL.a",
-            "sources": [ "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/spi_protocol.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/pin.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/pinconfig.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/clockpwr.c" ],
+            "sources": [ "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/gpio_matrix.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/spi_protocol.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/pin.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/pinconfig.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/clockpwr.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/io_mux.c" ],
             "include_dirs": [ "inc" ]
         },
         "app_trace": {

@@ -2,7 +2,7 @@
 -- Project sdkconfig file D:/Workshop/SNS/simple-nav-system/sdkconfig
 -- Compiler supported targets: xtensa-esp-elf
 -- Found Python3: A:/Espressif/python_env/idf5.3_py3.11_env/Scripts/python.exe (found version "3.11.2") found components: Interpreter 
--- App "SimpleNavSys" version: d1b5fc2-dirty
+-- App "SimpleNavSys" version: cb977ac-dirty
 -- Adding linker script D:/Workshop/SNS/simple-nav-system/build/esp-idf/esp_system/ld/memory.ld
 -- Adding linker script D:/Workshop/SNS/simple-nav-system/build/esp-idf/esp_system/ld/sections.ld.in
 -- Adding linker script A:/Espressif/frameworks/esp-idf-v5.3.1/components/esp_rom/esp32/ld/esp32.rom.ld

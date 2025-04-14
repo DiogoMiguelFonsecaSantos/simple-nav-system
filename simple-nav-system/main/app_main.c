@@ -1,30 +1,22 @@
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "led.h"
 
-#define DELAY_MS          100
-#define GPIO_OUT_W1TS_REG 0x3FF44008
-#define GPIO_OUT_W1TC_REG 0x3FF4400C
-#define GPIO_EN_REG       0x3FF44020
+#define DELAY_MS          6000
 #define GPIO_LED          22
 
 void app_main(void)
 {
+    // Initialize the LED
+    LED_Init(ON); // Initialize LED in OFF state
+    vTaskDelay(pdMS_TO_TICKS(5000)); // Delay for 5 seconds
 
-    volatile uint32_t* gpio_out_w1ts_reg = (volatile uint32_t*) GPIO_OUT_W1TS_REG;
-    volatile uint32_t* gpio_out_w1tc_reg = (volatile uint32_t*) GPIO_OUT_W1TC_REG;
-    volatile uint32_t* gpio_en_reg       = (volatile uint32_t*) GPIO_EN_REG;
-
-    *gpio_en_reg = (1 << GPIO_LED);
-
-    while(1)
+    while (1)
     {
-
-        *gpio_out_w1ts_reg = (1 << GPIO_LED);
+        // Set GPIO 22 high
+        LED_Toggle(); // Toggle the LED state
+        printf("LED is %s\n\n", LED_GetState() ? "ON" : "OFF");
         vTaskDelay(pdMS_TO_TICKS(DELAY_MS));
-        *gpio_out_w1tc_reg = (1 << GPIO_LED);
-        vTaskDelay(pdMS_TO_TICKS(DELAY_MS));
-    }
-
-
+    }   
 }

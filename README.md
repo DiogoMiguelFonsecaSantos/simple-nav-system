@@ -1,6 +1,6 @@
 # Simple Navigation System for BTT
 
-![Banner](docs/bike.png)
+![Banner](simple-nav-system/docs/bike.png)
 
 Este projeto tem como objetivo desenvolver o hardware e software para um sistema simples e acessível de navegação para bicicletas Todo-o-Terreno (BTT), que consiste na monitorização de variáveis como localização geográfica, direção e velocidade.
 
@@ -15,7 +15,7 @@ Este projeto visa fornecer uma alternativa acessível a estes dispositivos conve
 
 Este projeto tem como objetivo desenvolver um protótipo de um sistema de navegação simples e acessível para BTT. A figura ilustra a arquitetura do projeto.
 
-![Arquitetura inical do projeto](docs/architecture.png)
+![Arquitetura inical do projeto](simple-nav-system/docs/architecture.png)
 
 - O microcontrolador estará encarregue de processar os dados provenientes dos sensores, interpretando informações como direção, velocidade e trajetória percorrida. Será necessário desenvolver e aplicar algoritmos de processamento de sensores como filtragem para garantir leituras confiáveis.
 

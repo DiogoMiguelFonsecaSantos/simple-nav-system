@@ -3,20 +3,26 @@
 #include "freertos/task.h"
 #include "led.h"
 
-#define DELAY_MS          6000
-#define GPIO_LED          22
+#define DELAY_MS          5000
+#define GPIO_LED          26
 
 void app_main(void)
 {
-    // Initialize the LED
-    LED_Init(ON); // Initialize LED in OFF state
-    vTaskDelay(pdMS_TO_TICKS(5000)); // Delay for 5 seconds
+    
+    GPIO_EnableOutput(GPIO_LED); // Enable GPIO 12 as output
+    GPIO_SetOutput(GPIO_LED); // Set GPIO 12 high (LED ON)
+    vTaskDelay(pdMS_TO_TICKS(DELAY_MS)); // Delay for 5 seconds
 
     while (1)
     {
         // Set GPIO 22 high
-        LED_Toggle(); // Toggle the LED state
-        printf("LED is %s\n\n", LED_GetState() ? "ON" : "OFF");
+        if (GPIO_ReadOutput(GPIO_LED)) {
+            GPIO_ClearOutput(GPIO_LED);
+            
+        } else {
+            GPIO_SetOutput(GPIO_LED);
+        }
+        printf("LED is %s\n\n", GPIO_ReadOutput(GPIO_LED) ? "ON" : "OFF");
         vTaskDelay(pdMS_TO_TICKS(DELAY_MS));
     }   
 }

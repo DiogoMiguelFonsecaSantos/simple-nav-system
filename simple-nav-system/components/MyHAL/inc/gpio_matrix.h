@@ -19,5 +19,6 @@ void GPIO_OVWREnable(uint8_t gpio);
 void GPIO_EnableOutput(uint8_t gpio);
 void GPIO_DisableOutput(uint8_t gpio);
 bool GPIO_ReadInput(uint8_t gpio);
+bool GPIO_ReadOutput(uint8_t gpio);
 
 #endif /* COMPONENTS_MYHAL_INC_GPIO_MATRIX_H_ */

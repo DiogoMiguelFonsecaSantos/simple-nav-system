@@ -80,3 +80,14 @@ bool GPIO_ReadInput(uint8_t gpio) {
     }
     return false; // Invalid GPIO
 }
+
+bool GPIO_ReadOutput(uint8_t gpio) {
+    if (gpio < 32) {
+        // Read output state for GPIO 0-31
+        return (GPIO_MATRIX->OUT & (1 << gpio)) != 0;
+    } else if (gpio < 40) {
+        // Read output state for GPIO 32-39
+        return (GPIO_MATRIX->OUT1 & (1 << (gpio - 32))) != 0;
+    }
+    return false; // Invalid GPIO
+}

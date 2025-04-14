@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+D:/Workshop/SNS/simple-nav-system/build/CMakeFiles/bootloader
+D:/Workshop/SNS/simple-nav-system/build/CMakeFiles/bootloader.rule
+D:/Workshop/SNS/simple-nav-system/build/CMakeFiles/bootloader-complete.rule
+D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

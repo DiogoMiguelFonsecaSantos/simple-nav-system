@@ -57,9 +57,8 @@ void PIN_Direction(PIN_ValueType pinId, PIN_DirectionEnumType dir);
 void PIN_Set(PIN_ValueType pinId);   
 void PIN_Clear(PIN_ValueType pinId);
 bool PIN_Value(PIN_ValueType pinId);
-
+void PIN_Reset(PIN_ValueType pinId); //pin reset
 
 //pin reset
-//pin direction
 
 #endif /* COMPONENTS_MYHAL_INC_PIN_H_ */

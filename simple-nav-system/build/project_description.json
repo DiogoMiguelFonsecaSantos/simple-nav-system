@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "SimpleNavSys",
-    "project_version":    "e12e8a7-dirty",
+    "project_version":    "5c4d39d-dirty",
     "project_path":       "C:/SNS/PFC/simple-nav-system",
     "idf_path":           "C:/Espressif/frameworks/esp-idf-v5.3.1",
     "build_dir":          "C:/SNS/PFC/simple-nav-system/build",
@@ -50,13 +50,13 @@
             "dir": "C:/SNS/PFC/simple-nav-system/components/MyHAL",
             "type": "LIBRARY",
             "lib": "__idf_MyHAL",
-            "reqs": [ "driver", "esp_system", "esp_hw_support", "hal" ],
+            "reqs": [],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "C:/SNS/PFC/simple-nav-system/build/esp-idf/MyHAL/libMyHAL.a",
             "sources": [ "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/gpio_matrix.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/spi_protocol.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/pin.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/pinconfig.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/clockpwr.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/io_mux.c" ],
-            "include_dirs": [ "inc" ]
+            "include_dirs": [ "inc", "../MyHWMAP" ]
         },
         "app_trace": {
             "alias": "idf::app_trace",
@@ -1205,7 +1205,7 @@
             "dir": "C:/SNS/PFC/simple-nav-system/main",
             "type": "LIBRARY",
             "lib": "__idf_main",
-            "reqs": [ "MyHAL", "MyDRIVERS" ],
+            "reqs": [ "MyHAL", "MyDRIVERS", "driver", "hal" ],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
@@ -2817,7 +2817,7 @@
             "prefix": "idf",
             "dir": "C:/SNS/PFC/simple-nav-system/main",
             "lib": "__idf_main",
-            "reqs": [ "MyHAL", "MyDRIVERS" ],
+            "reqs": [ "MyHAL", "MyDRIVERS", "driver", "hal" ],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
@@ -2841,11 +2841,11 @@
             "prefix": "idf",
             "dir": "C:/SNS/PFC/simple-nav-system/components/MyHAL",
             "lib": "__idf_MyHAL",
-            "reqs": [ "driver", "esp_system", "esp_hw_support", "hal" ],
+            "reqs": [],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
-            "include_dirs": [ "inc" ]
+            "include_dirs": [ "inc", "../MyHWMAP" ]
         }
     },
     "debug_prefix_map_gdbinit": ""

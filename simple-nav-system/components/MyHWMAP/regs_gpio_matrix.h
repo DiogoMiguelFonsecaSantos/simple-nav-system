@@ -74,7 +74,7 @@ typedef struct {
     __I  uint32_t ACPU_NMI_INT1; // 0x78 - GPIO 32-39 ACPU NMI interrupt    (RO)
     __I  uint32_t PCPU_INT1;     // 0x7C - GPIO 32-39 PCPU interrupt        (RO)
     __I  uint32_t PCPU_NMI_INT1; // 0x80 - GPIO 32-39 PCPU NMI interrupt    (RO)
-
+         uint32_t RESERVED4;     // 0x84 - Reserved
     __IO uint32_t PIN0_REG;      // 0x88 - GPIO 0 pin                       (R/W)
     __IO uint32_t PIN1_REG;      // 0x8C - GPIO 1 pin                       (R/W)
     __IO uint32_t PIN2_REG;      // 0x90 - GPIO 2 pin                       (R/W)
@@ -95,18 +95,18 @@ typedef struct {
     __IO uint32_t PIN17_REG;     // 0xCC - GPIO 17 pin                      (R/W)
     __IO uint32_t PIN18_REG;     // 0xD0 - GPIO 18 pin                      (R/W)
     __IO uint32_t PIN19_REG;     // 0xD4 - GPIO 19 pin                      (R/W)
-    __IO uint32_t PIN20_REG;     // 0xD8 - GPIO 20 pin                      (R/W)
+         uint32_t RESERVED5;     // 0xD8 - GPIO 20 pin                      (R/W)
     __IO uint32_t PIN21_REG;     // 0xDC - GPIO 21 pin                      (R/W)
     __IO uint32_t PIN22_REG;     // 0xE0 - GPIO 22 pin                      (R/W)
     __IO uint32_t PIN23_REG;     // 0xE4 - GPIO 23 pin                      (R/W)
-    __IO uint32_t PIN24_REG;     // 0xE8 - GPIO 24 pin                      (R/W)
+         uint32_t RESERVED6;     // 0xE8 - GPIO 24 pin                      (R/W)
     __IO uint32_t PIN25_REG;     // 0xEC - GPIO 25 pin                      (R/W)
     __IO uint32_t PIN26_REG;     // 0xF0 - GPIO 26 pin                      (R/W)
     __IO uint32_t PIN27_REG;     // 0xF4 - GPIO 27 pin                      (R/W)
-    __IO uint32_t PIN28_REG;     // 0xF8 - GPIO 28 pin                      (R/W)
-    __IO uint32_t PIN29_REG;     // 0xFC - GPIO 29 pin                      (R/W)
-    __IO uint32_t PIN30_REG;     // 0x100 - GPIO 30 pin                     (R/W)
-    __IO uint32_t PIN31_REG;     // 0x104 - GPIO 31 pin                     (R/W)
+         uint32_t RESERVED7;     // 0xF8 - GPIO 28 pin                      (R/W)
+         uint32_t RESERVED8;     // 0xFC - GPIO 29 pin                      (R/W)
+         uint32_t RESERVED9;     // 0x100 - GPIO 30 pin                     (R/W)
+         uint32_t RESERVED10;     // 0x104 - GPIO 31 pin                     (R/W)
     __IO uint32_t PIN32_REG;     // 0x108 - GPIO 32 pin                     (R/W)
     __IO uint32_t PIN33_REG;     // 0x10C - GPIO 33 pin                     (R/W)
     __IO uint32_t PIN34_REG;     // 0x110 - GPIO 34 pin                     (R/W)
@@ -115,7 +115,7 @@ typedef struct {
     __IO uint32_t PIN37_REG;     // 0x11C - GPIO 37 pin                     (R/W)
     __IO uint32_t PIN38_REG;     // 0x120 - GPIO 38 pin                     (R/W)
     __IO uint32_t PIN39_REG;     // 0x124 - GPIO 39 pin                     (R/W)
-         uint32_t RESERVED4[2];  // 0x128 - Reserved 
+         uint32_t RESERVED11[2];  // 0x128 - Reserved 
     __IO uint32_t FUNC0_IN_SEL_CFG;  // 0x130 - GPIO 0 function select         (R/W)
     __IO uint32_t FUNC1_IN_SEL_CFG;  // 0x134 - GPIO 1 function select         (R/W)
     __IO uint32_t FUNC2_IN_SEL_CFG;  // 0x138 - GPIO 2 function select         (R/W)
@@ -392,12 +392,18 @@ typedef struct {
     __IO uint32_t FUNC17_OUT_SEL_CFG; // 0x574 - GPIO 17 function select        (R/W)
     __IO uint32_t FUNC18_OUT_SEL_CFG; // 0x578 - GPIO 18 function select        (R/W)
     __IO uint32_t FUNC19_OUT_SEL_CFG; // 0x57C - GPIO 19 function select        (R/W)
+         uint32_t RESERVED12;
     __IO uint32_t FUNC21_OUT_SEL_CFG; // 0x584 - GPIO 21 function select        (R/W)
     __IO uint32_t FUNC22_OUT_SEL_CFG; // 0x588 - GPIO 22 function select        (R/W)
     __IO uint32_t FUNC23_OUT_SEL_CFG; // 0x58C - GPIO 23 function select        (R/W)
+         uint32_t RESERVED13;
     __IO uint32_t FUNC25_OUT_SEL_CFG; // 0x594 - GPIO 25 function select        (R/W)
     __IO uint32_t FUNC26_OUT_SEL_CFG; // 0x598 - GPIO 26 function select        (R/W)
     __IO uint32_t FUNC27_OUT_SEL_CFG; // 0x59C - GPIO 27 function select        (R/W)
+         uint32_t RESERVED14;
+         uint32_t RESERVED15;
+         uint32_t RESERVED16;
+         uint32_t RESERVED17; 
     __IO uint32_t FUNC32_OUT_SEL_CFG; // 0x5B0 - GPIO 32 function select        (R/W)
     __IO uint32_t FUNC33_OUT_SEL_CFG; // 0x5B4 - GPIO 33 function select        (R/W)
 } GPIO_Matrix_Type;

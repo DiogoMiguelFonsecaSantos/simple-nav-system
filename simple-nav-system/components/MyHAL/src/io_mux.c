@@ -6,8 +6,8 @@
  */
 
 #include "io_mux.h"
-#include "regs_io_mux.h"
 #include <stdint.h>
+#include <stddef.h>
 
 void IO_MUX_PIN_CTRL_OutCLK_I2S0(IO_MUX_PIN_CTRL_ClockOut clk_out) {
 
@@ -117,7 +117,7 @@ void IO_MUX_FUN_WPD_PinCFG(__IO uint32_t *reg, IO_MUX_FUN_WPD_PinType wpdPin){
     *reg |= (wpdPin << 7); 
 }
 
-void IO_MUX_SLP_SELModeCFG(__IO uint32_t *reg, IO_MUX_SLP_SELMode slpSelMode{
+void IO_MUX_SLP_SELModeCFG(__IO uint32_t *reg, IO_MUX_SLP_SELMode slpSelMode){
 
     if (reg == NULL) {
         return; // Invalid register pointer
@@ -181,6 +181,8 @@ void IO_MUX_MCU_OEnableCFG(__IO uint32_t *reg, IO_MUX_MCU_OEnableType sleepOEnab
     // Set the sleep OEnable bit to the desired value
     *reg |= (sleepOEnable << 0); 
 }
+
+//could be done with struct so that it is more flexible and configurable
 
 void IO_MUX_RegisterCFG(__IO uint32_t *reg, IO_MUX_MCU_SEL_FunctionType function, IO_MUX_FUN_DRV_StrengthType strength, 
     IO_MUX_FUN_IEnableType iEnable, IO_MUX_FUN_WPU_PinType wpuPin, IO_MUX_FUN_WPD_PinType wpdPin, 

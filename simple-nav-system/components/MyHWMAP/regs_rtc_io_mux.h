@@ -5,8 +5,8 @@
  *      Author: diogo
  */
 
-#ifndef COMPONENTS_MYHAL_INC_REGS_RTC_IO_MUX_H_
-#define COMPONENTS_MYHAL_INC_REGS_RTC_IO_MUX_H_
+#ifndef COMPONENTS_MYHWMAP_REGS_RTC_IO_MUX_H_
+#define COMPONENTS_MYHWMAP_REGS_RTC_IO_MUX_H_
 
 /* IO definitions (access restrictions to peripheral registers) */
 /**
@@ -88,4 +88,4 @@ typedef struct {
 
 #define RTC_IO_MUX ((RTC_IO_MUX_Type *) RTC_IO_MUX_REG_START_BASE)
 
-#endif /* COMPONENTS_MYHAL_INC_REGS_RTC_IO_MUX_H_ */
+#endif /* COMPONENTS_MYHWMAP_REGS_RTC_IO_MUX_H_ */

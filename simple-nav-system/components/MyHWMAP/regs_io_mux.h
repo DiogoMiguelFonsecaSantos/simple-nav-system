@@ -5,8 +5,8 @@
  *      Author: Diogo
  */
 
-#ifndef COMPONENTS_MYHAL_INC_REGS_IO_MUX_H_
-#define COMPONENTS_MYHAL_INC_REGS_IO_MUX_H_
+#ifndef COMPONENTS_MYHWMAP_REGS_IO_MUX_H_
+#define COMPONENTS_MYHWMAP_REGS_IO_MUX_H_
 
 /* IO definitions (access restrictions to peripheral registers) */
 /**
@@ -16,48 +16,14 @@
     \li to specify the access to peripheral variables.
     \li for automatic generation of peripheral register debug information.
 */
+#include <stdint.h>
 #ifdef __cplusplus
     #define   __I     volatile             /*!< Defines 'read only' permissions                 */
 #else
     #define   __I     volatile const       /*!< Defines 'read only' permissions                 */
 #endif
 #define     __O     volatile             /*!< Defines 'write only' permissions                */
-#define     __IO    volatile             /*!< Defines 'read / write' permissions              */
-
-#define REG_GPIO36                              (&IO_MUX->GPIO36)
-#define REG_GPIO37                              (&IO_MUX->GPIO37)
-#define REG_GPIO38                              (&IO_MUX->GPIO38)
-#define REG_GPIO39                              (&IO_MUX->GPIO39)
-#define REG_GPIO34                              (&IO_MUX->GPIO34)
-#define REG_GPIO35                              (&IO_MUX->GPIO35)
-#define REG_GPIO32                              (&IO_MUX->GPIO32)
-#define REG_GPIO33                              (&IO_MUX->GPIO33)
-#define REG_GPIO25                              (&IO_MUX->GPIO25)
-#define REG_GPIO26                              (&IO_MUX->GPIO26)
-#define REG_GPIO27                              (&IO_MUX->GPIO27)
-#define REG_MTMS                                (&IO_MUX->MTMS)
-#define REG_MTDI                                (&IO_MUX->MTDI)
-#define REG_MTCK                                (&IO_MUX->MTCK)
-#define REG_MTDO                                (&IO_MUX->MTDO)
-#define REG_GPIO2                               (&IO_MUX->GPIO2)
-#define REG_GPIO0                               (&IO_MUX->GPIO0)
-#define REG_GPIO4                               (&IO_MUX->GPIO4)
-#define REG_GPIO16                              (&IO_MUX->GPIO16)
-#define REG_GPIO17                              (&IO_MUX->GPIO17)
-#define REG_SD_DATA2                            (&IO_MUX->SD_DATA2)
-#define REG_SD_DATA3                            (&IO_MUX->SD_DATA3)
-#define REG_SD_CMD                              (&IO_MUX->SD_CMD)
-#define REG_SD_CLK                              (&IO_MUX->SD_CLK)
-#define REG_SD_DATA0                            (&IO_MUX->SD_DATA0)
-#define REG_SD_DATA1                            (&IO_MUX->SD_DATA1)
-#define REG_GPIO5                               (&IO_MUX->GPIO5)
-#define REG_GPIO18                              (&IO_MUX->GPIO18)
-#define REG_GPIO19                              (&IO_MUX->GPIO19)
-#define REG_GPIO21                              (&IO_MUX->GPIO21)
-#define REG_GPIO22                              (&IO_MUX->GPIO22)
-#define REG_U0RXD                               (&IO_MUX->U0RXD)
-#define REG_U0TXD                               (&IO_MUX->U0TXD)
-#define REG_GPIO23                              (&IO_MUX->GPIO23)         
+#define     __IO    volatile             /*!< Defines 'read / write' permissions              */     
 
 #define IO_MUX_MCU_SEL_MASK                     (0X07 << 12)
 #define IO_MUX_FUN_DRV_MASK                     (0X03 << 10)
@@ -115,4 +81,4 @@ typedef struct {
 
 #define IO_MUX ((IO_MUX_Type *) IO_MUX_BASE)
 
-#endif /* COMPONENTS_MYHAL_INC_REGS_IO_MUX_H_ */
+#endif /* COMPONENTS_MYHWMAP_REGS_IO_MUX_H_ */

@@ -235,7 +235,8 @@ void IO_MUX_MCU_WPU_PinCFG(__IO uint32_t *reg, IO_MUX_MCU_WPU_PinType sleepWpuPi
 void IO_MUX_MCU_WPD_PinCFG(__IO uint32_t *reg, IO_MUX_MCU_WPD_PinType sleepWpdPin);
 void IO_MUX_MCU_OEnableCFG(__IO uint32_t *reg, IO_MUX_MCU_OEnableType sleepOEnable);
 
-void IO_MUX_RegisterCFG(__IO uint32_t *reg, IO_MUX_MCU_SEL_FunctionType function, IO_MUX_FUN_DRV_StrengthType strength, 
+
+void IO_MUX_CustomRegisterCFG(__IO uint32_t *reg, IO_MUX_MCU_SEL_FunctionType function, IO_MUX_FUN_DRV_StrengthType strength, 
     IO_MUX_FUN_IEnableType iEnable, IO_MUX_FUN_WPU_PinType wpuPin, IO_MUX_FUN_WPD_PinType wpdPin, 
     IO_MUX_SLP_SELMode slpSelMode, IO_MUX_MCU_DRV_StrengthType sleepStrength, 
     IO_MUX_MCU_IEnableType sleepIEnable, IO_MUX_MCU_WPU_PinType sleepWpuPin, IO_MUX_MCU_WPD_PinType sleepWpdPin, 

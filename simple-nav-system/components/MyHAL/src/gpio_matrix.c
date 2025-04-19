@@ -285,4 +285,22 @@ void GPIO_FunctionOutSelect_CustomRegConfig(__IO uint32_t *reg, FunctionOEnableI
     GPIO_ForceOEnableSignalSource(reg, source); // Select the source for the output enable signal
     GPIO_SelectIfInvertOutSignal(reg, invbit2); // Select if the output signal is inverted
     GPIO_FuncOutputControlSelection(reg, s); // Set the function output control selection
-    }
+}
+
+__IO uint32_t * GPIO_MATRIX_Get_GPIO_PINn_REG_ADDR(uint8_t pinId){
+
+    return (volatile uint32_t *)((uintptr_t)&GPIO_MATRIX->PIN0_REG + (pinId * 4));
+     
+}
+
+__IO uint32_t * GPIO_MATRIX_Get_FUNCy_IN_SEL_CFG_REG_ADDR(uint8_t funcY){
+
+    return (volatile uint32_t *)((uintptr_t)&GPIO_MATRIX->FUNC0_IN_SEL_CFG + (funcY * 4));
+     
+}
+
+__IO uint32_t * GPIO_MATRIX_Get_FUNCn_OUT_SEL_CFG_REG_ADDR(uint8_t pinId){
+
+    return (volatile uint32_t *)((uintptr_t)&GPIO_MATRIX->FUNC0_OUT_SEL_CFG + (pinId * 4));
+     
+}

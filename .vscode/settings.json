@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "regs_gpio_matrix.h": "c"
+        "regs_gpio_matrix.h": "c",
+        "regs_io_mux.h": "c",
+        "pinconfig.h": "c",
+        "io_mux.h": "c"
     }
 }

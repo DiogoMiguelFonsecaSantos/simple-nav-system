@@ -241,5 +241,6 @@ void IO_MUX_CustomRegisterCFG(__IO uint32_t *reg, IO_MUX_MCU_SEL_FunctionType fu
     IO_MUX_SLP_SELMode slpSelMode, IO_MUX_MCU_DRV_StrengthType sleepStrength, 
     IO_MUX_MCU_IEnableType sleepIEnable, IO_MUX_MCU_WPU_PinType sleepWpuPin, IO_MUX_MCU_WPD_PinType sleepWpdPin, 
     IO_MUX_MCU_OEnableType sleepOEnable);
+    __IO uint32_t * IO_MUX_FindRegThroughPinId(uint8_t pinId);
 
 #endif /* COMPONENTS_MYHAL_INC_IO_MUX_H_ */

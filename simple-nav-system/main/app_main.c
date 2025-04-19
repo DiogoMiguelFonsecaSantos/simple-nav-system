@@ -5,38 +5,55 @@
 #include "io_mux.h"
 #include "gpio_matrix.h"
 #include "driver/gpio.h"
+#include <string.h>
+#include "pin.h"
+#include "pinconfig.h"
+#include "regs_gpio_matrix.h"
+#include "regs_io_mux.h"
+#include "esp_system.h"
+#include "esp_log.h"
 
 #define BOOTDELAY_MS      5000
 #define DELAY_MS          100
 #define GPIO_LED          26
 #define GPIO_BLUE         12
-
+#define LED               22
 
 void app_main(void)
 {
-    GPIO_FuncOutputControlSelection(&GPIO_MATRIX->FUNC12_OUT_SEL_CFG, 0x100);
-    GPIO_ForceOEnableSignalSource(&GPIO_MATRIX->FUNC12_OUT_SEL_CFG,EN_REGn);
-    GPIO_EnableOutput(GPIO_BLUE);
+    PIN_Reset(GPIO_BLUE); // Reset GPIO 12
+    PIN_InitGPIO_OutputPin(GPIO_BLUE); // Initialize GPIO 12 as output
 
-    IO_MUX_MCU_SEL_FunctionCFG(&IO_MUX->MTDI,F2_GPIO);
-    IO_MUX_FUN_DRV_StrengthCFG(&IO_MUX->MTDI, LOWEST);
+    gpio_dump_io_configuration(stdout, (1ULL << 12));
+    PIN_Set(GPIO_BLUE);
 
-    GPIO_SetOutput(GPIO_BLUE);
+    PIN_Reset(LED); // Reset GPIO 12
+    PIN_InitGPIO_OutputPin(LED); // Initialize GPIO 12 as output
+    PIN_Set(LED); // Set GPIO 12 output
+
+    gpio_dump_io_configuration(stdout, (1ULL << LED));
+
     vTaskDelay(pdMS_TO_TICKS(BOOTDELAY_MS)); // Delay for 5 seconds
 
     while (1)
     {
 
-        // printf("ADDR: %lx\n", (long) FUNC12_OUT_SEL_CFG_REG);
-        //vTaskDelay(pdMS_TO_TICKS(BOOTDELAY_MS));
-
-        GPIO_ClearOutput(GPIO_BLUE); // Clear GPIO 12 output
+        PIN_Clear(GPIO_BLUE); // Clear GPIO 12 output
+        PIN_Clear(LED); // Clear GPIO 12 output
         printf("LED is OFF\n"); 
         vTaskDelay(pdMS_TO_TICKS(DELAY_MS)); // Delay
         
-        GPIO_SetOutput(GPIO_BLUE); // Set GPIO 12 output
+        PIN_Set(GPIO_BLUE); // Set GPIO 12 output
+        PIN_Set(LED);
         printf("LED is ON\n");
         vTaskDelay(pdMS_TO_TICKS(DELAY_MS)); // Delay
+        bool status = PIN_Value(GPIO_BLUE); // Read GPIO 12 value
+        if (status) {
+            printf("GPIO 12 is HIGH\n");
+        } else {
+            printf("GPIO 12 is LOW\n");
+        }
+
     }
     
 }

@@ -28,8 +28,8 @@ typedef enum{
 
 typedef enum{
 
-    NORMAL = 0,
-    OPENDRAIN = 1
+    NORMAL_PIN = 0,
+    OPENDRAIN_PIN = 1
 }PINPadDriverTypeDef;
 
 typedef enum{
@@ -153,5 +153,11 @@ void GPIO_FuncOutputControlSelection(__IO uint32_t *reg, uint16_t s );
 
 void GPIO_FunctionOutSelect_CustomRegConfig(__IO uint32_t *reg, FunctionOEnableInvSelectTypeDef invbit, SourceForOutputEnableTypeDef source, 
     FunctionOutputValInvSelectTypeDef invbit2, uint8_t s);
+
+__IO uint32_t * GPIO_MATRIX_Get_GPIO_PINn_REG_ADDR(uint8_t pinId);
+
+__IO uint32_t * GPIO_MATRIX_Get_FUNCy_IN_SEL_CFG_REG_ADDR(uint8_t funcY);
+
+__IO uint32_t * GPIO_MATRIX_Get_FUNCn_OUT_SEL_CFG_REG_ADDR(uint8_t pinId);
 
 #endif /* COMPONENTS_MYHAL_INC_GPIO_MATRIX_H_ */

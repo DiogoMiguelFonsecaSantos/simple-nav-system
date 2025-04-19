@@ -15,8 +15,7 @@
 
 #include <stdint.h>
 
-#define GPIO_MATRIX_BASE   0x3FF44000
-#define GPIO_REG_SIZE      32
+
 
 /*
 * NOTE: with REG you will overwrite the whole register, with REG_SET you will set the bits 
@@ -39,6 +38,9 @@
 #endif
 #define     __O     volatile             /*!< Defines 'write only' permissions                */
 #define     __IO    volatile             /*!< Defines 'read / write' permissions              */
+
+#define GPIO_MATRIX_BASE   0x3FF44000
+#define GPIO_REG_SIZE      32
 
 typedef struct {
          uint32_t RESERVED0;     // 0x00 - Reserved

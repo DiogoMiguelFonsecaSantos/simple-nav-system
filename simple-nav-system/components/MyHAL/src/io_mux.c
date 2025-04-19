@@ -8,6 +8,8 @@
 #include "io_mux.h"
 #include <stdint.h>
 #include <stddef.h>
+#include <stdio.h>
+
 
 void IO_MUX_PIN_CTRL_OutCLK_I2S0(IO_MUX_PIN_CTRL_ClockOut clk_out) {
 
@@ -190,16 +192,68 @@ void IO_MUX_RegisterCFG(__IO uint32_t *reg, IO_MUX_MCU_SEL_FunctionType function
     IO_MUX_MCU_IEnableType sleepIEnable, IO_MUX_MCU_WPU_PinType sleepWpuPin, IO_MUX_MCU_WPD_PinType sleepWpdPin, 
     IO_MUX_MCU_OEnableType sleepOEnable){
 
-    IO_MUX_MCU_SEL_FunctionCFG(reg, function);
-    IO_MUX_FUN_DRV_StrengthCFG(reg, strength);
-    IO_MUX_FUN_IEnableCFG(reg, iEnable);
-    IO_MUX_FUN_WPU_PinCFG(reg, wpuPin);
-    IO_MUX_FUN_WPD_PinCFG(reg, wpdPin);
-    IO_MUX_SLP_SELModeCFG(reg, slpSelMode);
-    IO_MUX_MCU_DRV_StrengthCFG(reg, sleepStrength);
-    IO_MUX_MCU_IEnableCFG(reg, sleepIEnable);
-    IO_MUX_MCU_WPU_PinCFG(reg, sleepWpuPin);
-    IO_MUX_MCU_WPD_PinCFG(reg, sleepWpdPin);
-    IO_MUX_MCU_OEnableCFG(reg, sleepOEnable);
+    IO_MUX_MCU_SEL_FunctionCFG  (reg, function);
+    IO_MUX_FUN_DRV_StrengthCFG  (reg, strength);
+    IO_MUX_FUN_IEnableCFG       (reg, iEnable);
+    IO_MUX_FUN_WPU_PinCFG       (reg, wpuPin);
+    IO_MUX_FUN_WPD_PinCFG       (reg, wpdPin);
+    IO_MUX_SLP_SELModeCFG       (reg, slpSelMode);
+    IO_MUX_MCU_DRV_StrengthCFG  (reg, sleepStrength);
+    IO_MUX_MCU_IEnableCFG       (reg, sleepIEnable);
+    IO_MUX_MCU_WPU_PinCFG       (reg, sleepWpuPin);
+    IO_MUX_MCU_WPD_PinCFG       (reg, sleepWpdPin);
+    IO_MUX_MCU_OEnableCFG       (reg, sleepOEnable);
 }
 
+
+
+
+
+__IO uint32_t * IO_MUX_FindRegThroughPinId(uint8_t pinId){
+
+    __IO uint32_t *reg = NULL;
+
+    // Map the pin number to the corresponding register in IO_MUX
+    switch (pinId) {
+        case 0: reg = &IO_MUX->GPIO0; break;
+        case 1: reg = &IO_MUX->U0TXD; break;
+        case 2: reg = &IO_MUX->GPIO2; break;
+        case 3: reg = &IO_MUX->U0RXD; break;
+        case 4: reg = &IO_MUX->GPIO4; break;
+        case 5: reg = &IO_MUX->GPIO5; break;
+        case 6: reg = &IO_MUX->SD_CLK; break;
+        case 7: reg = &IO_MUX->SD_DATA0; break;
+        case 8: reg = &IO_MUX->SD_DATA1; break;
+        case 9: reg = &IO_MUX->SD_DATA2; break;
+        case 10: reg = &IO_MUX->SD_DATA3; break;
+        case 11: reg = &IO_MUX->SD_CMD; break;
+        case 12: reg = &IO_MUX->MTDI; break;
+        case 13: reg = &IO_MUX->MTCK; break;
+        case 14: reg = &IO_MUX->MTMS; break;
+        case 15: reg = &IO_MUX->MTDO; break;
+        case 16: reg = &IO_MUX->GPIO16; break;
+        case 17: reg = &IO_MUX->GPIO17; break;
+        case 18: reg = &IO_MUX->GPIO18; break;
+        case 19: reg = &IO_MUX->GPIO19; break;
+        case 21: reg = &IO_MUX->GPIO21; break;
+        case 22: reg = &IO_MUX->GPIO22; break;
+        case 23: reg = &IO_MUX->GPIO23; break;
+        case 25: reg = &IO_MUX->GPIO25; break;
+        case 26: reg = &IO_MUX->GPIO26; break;
+        case 27: reg = &IO_MUX->GPIO27; break;
+        case 32: reg = &IO_MUX->GPIO32; break;
+        case 33: reg = &IO_MUX->GPIO33; break;
+        case 34: reg = &IO_MUX->GPIO34; break;
+        case 35: reg = &IO_MUX->GPIO35; break;
+        case 36: reg = &IO_MUX->GPIO36; break;
+        case 37: reg = &IO_MUX->GPIO37; break;
+        case 38: reg = &IO_MUX->GPIO38; break;
+        case 39: reg = &IO_MUX->GPIO39; break;
+        
+        default:
+            printf("Invalid pin number: %d\n", pinId);
+            return NULL;
+    }
+
+    return reg;
+}

@@ -15,31 +15,30 @@
 
 void LED_Init(LEDState state){
 
-    // Configure the LED pin as output
-    GPIO_EnableOutput(LED_PIN);
+    PIN_Reset(LED_PIN); // Reset GPIO 12
+    PIN_InitGPIO_OutputPin(LED_PIN); // Initialize GPIO 12 as output
     
     // Set the initial state of the LED
     if (state == ON) {
-        GPIO_ClearOutput(LED_PIN);
+        PIN_Clear(LED_PIN);
     } else {
-		GPIO_SetOutput(LED_PIN);
-        
+		PIN_Set(LED_PIN);
     }
 }
 
 bool LED_GetState(void) {
     // Read the current state of the LED pin
-    return !GPIO_ReadInput(LED_PIN);
+    return !PIN_Value(LED_PIN);
 }
 
 void LED_On(void) {
     // Turn the LED ON
-    GPIO_ClearOutput(LED_PIN);
+    PIN_Clear(LED_PIN);
 }
 
 void LED_Off(void) {
     // Turn the LED OFF
-    GPIO_SetOutput(LED_PIN);
+    PIN_Set(LED_PIN);
 }
 
 void LED_Toggle(void) {

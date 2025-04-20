@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "SimpleNavSys",
-    "project_version":    "9174c61-dirty",
+    "project_version":    "842905b-dirty",
     "project_path":       "D:/Workshop/SNS/simple-nav-system",
     "idf_path":           "A:/Espressif/frameworks/esp-idf-v5.3.1",
     "build_dir":          "D:/Workshop/SNS/simple-nav-system/build",

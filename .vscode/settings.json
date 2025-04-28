@@ -3,6 +3,10 @@
         "regs_gpio_matrix.h": "c",
         "regs_io_mux.h": "c",
         "pinconfig.h": "c",
-        "io_mux.h": "c"
+        "io_mux.h": "c",
+        "spi_driver.h": "c",
+        "regs_spi_controller.h": "c",
+        "spi_hal.h": "c",
+        "gpio_matrix.h": "c"
     }
 }

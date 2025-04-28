@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "SimpleNavSys",
-    "project_version":    "842905b-dirty",
+    "project_version":    "b53baed-dirty",
     "project_path":       "D:/Workshop/SNS/simple-nav-system",
     "idf_path":           "A:/Espressif/frameworks/esp-idf-v5.3.1",
     "build_dir":          "D:/Workshop/SNS/simple-nav-system/build",
@@ -40,7 +40,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "D:/Workshop/SNS/simple-nav-system/build/esp-idf/MyDRIVERS/libMyDRIVERS.a",
-            "sources": [ "D:/Workshop/SNS/simple-nav-system/components/MyDRIVERS/src/spi_driver.c", "D:/Workshop/SNS/simple-nav-system/components/MyDRIVERS/src/mpu9250.c", "D:/Workshop/SNS/simple-nav-system/components/MyDRIVERS/src/led.c" ],
+            "sources": [ "D:/Workshop/SNS/simple-nav-system/components/MyDRIVERS/src/led.c", "D:/Workshop/SNS/simple-nav-system/components/MyDRIVERS/src/mpu9250.c", "D:/Workshop/SNS/simple-nav-system/components/MyDRIVERS/src/spi_driver.c" ],
             "include_dirs": [ "inc" ]
         },
         "MyHAL": {
@@ -55,7 +55,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "D:/Workshop/SNS/simple-nav-system/build/esp-idf/MyHAL/libMyHAL.a",
-            "sources": [ "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/gpio_matrix.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/spi_protocol.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/pin.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/pinconfig.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/clockpwr.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/io_mux.c" ],
+            "sources": [ "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/gpio_matrix.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/pin.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/pinconfig.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/io_mux.c", "D:/Workshop/SNS/simple-nav-system/components/MyHAL/src/spi_hal.c" ],
             "include_dirs": [ "inc", "../MyHWMAP" ]
         },
         "app_trace": {

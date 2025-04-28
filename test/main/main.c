@@ -1,19 +1,9 @@
-#include <stdio.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "hal/gpio_types.h"
-#include "D:\Workshop\SNS\simple-nav-system\components\MyHWMAP\regs_gpio_matrix.h"
-#include "D:\Workshop\SNS\simple-nav-system\components\MyHAL\inc\io_mux.h"
-#include "gpio_matrix.h"
-#include "driver/gpio.h"
-#include <string.h>
-#include "pin.h"
-#include "pinconfig.h"
-#include "regs_gpio_matrix.h"
+
 
 #include "esp_system.h"
 #include "esp_log.h"
-#include "led.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 #define BOOTDELAY_MS      5000
 #define DELAY_MS          50
@@ -22,40 +12,24 @@
 #define LED               22
 #define RED               26 
 
-void blinkLED(void *pvParameters)
-{
-    while (1)
-    {
-        LED_Toggle(); // Toggle the LED state
-        vTaskDelay(pdMS_TO_TICKS(50)); // Delay
-    }
+#ifdef __cplusplus
+extern "C" {
+#endif
+uint8_t temprature_sens_read(); // Declaração correta da função
+#ifdef __cplusplus
 }
+#endif
 
+void app_main() {
+    while (1) {
+        // Obtém a temperatura interna do ESP32
+        uint8_t temp_f = temprature_sens_read();
+        float temp_c = (temp_f - 32) / 1.8;
 
-void app_main(void)
-{
-    LED_Init(ON); // Initialize the LED to ON state
-    printf("LED is %s\n", LED_GetState() ? "ON" : "OFF");
+        // Exibe a temperatura no terminal
+        printf("Temperature: %.2f C\n", temp_c);
 
-    gpio_dump_io_configuration(stdout, (1ULL << LED));
-
-    PIN_Reset(RED);
-    PIN_InitGPIO_OutputPin(RED); // Initialize GPIO 12 as output
-    PIN_Set(RED); // Set GPIO 12 output to HIGH
-
-    vTaskDelay(pdMS_TO_TICKS(BOOTDELAY_MS)); // Delay for 5 seconds
-    xTaskCreate(blinkLED, "BlinkLED", 2048, NULL, 5, NULL);
-    while (1)
-    {
-
-        PIN_Clear(RED); // Clear GPIO 12 output
-        printf("LED is OFF\n"); 
-        vTaskDelay(pdMS_TO_TICKS(DELAY_MS)); // Delay
-        PIN_Set(RED);
-        printf("LED is ON\n");
-        vTaskDelay(pdMS_TO_TICKS(DELAY_MS)); // Delay
-        
+        vTaskDelay(pdMS_TO_TICKS(5000)); // Aguarda 5 segundos
     }
-    
 }
 

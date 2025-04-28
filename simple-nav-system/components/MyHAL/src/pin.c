@@ -38,7 +38,7 @@ void PIN_Direction(PIN_ValueType pinId, PIN_DirectionEnumType dir) { //does it e
         GPIO_ForceOEnableSignalSource(funcOutSelCfg,EN_REGn);
     } else if (dir == INPUT) {
         // Add input-specific configuration here if needed
-        printf("Configuring GPIO%d as input is not implemented yet\n", pinId);
+        GPIO_DisableOutput(pinId); // Disable output for the pin
     }
 }
 

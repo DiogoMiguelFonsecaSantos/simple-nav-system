@@ -1,5 +1,5 @@
 /*
- * regs.h
+ * regs_gpio_matrix.h
  *
  *  Created on: 14/04/2025
  *      Author: Diogo

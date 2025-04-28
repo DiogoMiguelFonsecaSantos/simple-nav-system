@@ -1,5 +1,5 @@
 
 
-idf_component_register(SRCS "src/gpio_matrix.c" "src/spi_protocol.c" "src/pin.c" "src/pinconfig.c" "src/clockpwr.c" "src/io_mux.c" 
+idf_component_register(SRCS "src/gpio_matrix.c"  "src/pin.c" "src/pinconfig.c" "src/io_mux.c" "src/spi_hal.c"
                        INCLUDE_DIRS "inc" "../MyHWMAP"
                        REQUIRES )

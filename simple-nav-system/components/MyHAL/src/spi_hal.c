@@ -1,5 +1,5 @@
 #include "spi_hal.h"
-#include "regs_spi_controller.h"
+#include "regs_spi_peripheral.h"
 #include "pinconfig.h"
 #include <stddef.h>
 #include <stdint.h>
@@ -636,7 +636,7 @@ void SPI_HAL_ResetSync(GenericSPI_Type *SPIx) {
 }
 
 // Function to set the SPI_SLAVE_MODE bit
-void SPI_HAL_SetSlaveMode(GenericSPI_Type *SPIx, bool enable) {
+void SPI_HAL_SetSlaveOrMaster(GenericSPI_Type *SPIx, bool enable) {
     if (enable) {
         SPIx->SLAVE |= (1 << 30); // Set SPI_SLAVE_MODE to 1 (slave mode)
     } else {

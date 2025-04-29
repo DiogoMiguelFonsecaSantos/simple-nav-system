@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "spi_hal.h"
-#include "regs_spi_controller.h"
+#include "regs_spi_peripheral.h"
 #include "pinconfig.h"
 #include "gpio_matrix.h"
 #include "io_mux.h"
@@ -125,5 +125,15 @@ typedef struct {
 
 typedef SPIDeviceContext* SPI_Handle_t;
 
+
+void SPIProtocol_SetMasterMode(GenericSPI_Type *SPIx, int mode);
+
+void SPI_PinsConfig();
+
+void SPIProtocol_Init(GenericSPI_Type *SPIx, int len, uint8_t preDivider, uint8_t div, int mode);
+void SPI_ISR_Handler(GenericSPI_Type *SPIx);
+void SPIProtocol_TriggerOperation(GenericSPI_Type *SPIx);
+void SPIProtocol_SendData(GenericSPI_Type *SPIx, const uint8_t *data, uint32_t length);
+void SPIProtocol_Transaction(GenericSPI_Type *SPIx, const uint8_t *txData, uint8_t *rxData, uint32_t length);
 
 #endif /* COMPONENTS_MYDRIVERS_INC_SPI_DRIVER_H_ */

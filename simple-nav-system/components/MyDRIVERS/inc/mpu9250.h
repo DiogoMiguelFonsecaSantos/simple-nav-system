@@ -41,33 +41,5 @@
  #define MPU9250_SPI_CS_HOLD   1
  #define MPU9250_SPI_QUEUE_SIZE 5
  
- typedef struct {
-     SPI_Handle_t spi;
-     float accel_scale;
-     float gyro_scale;
-     float mag_scale;
-     bool mag_enabled;
- } MPU9250_Handle;
- 
- // Initialization functions
- bool MPU9250_Init(MPU9250_Handle *handle, int mosi_pin, int miso_pin, int sclk_pin, int cs_pin);
- bool MPU9250_Verify(MPU9250_Handle *handle);
- 
- // Configuration functions
- void MPU9250_ConfigAccel(MPU9250_Handle *handle, uint8_t range);
- void MPU9250_ConfigGyro(MPU9250_Handle *handle, uint8_t range);
- bool MPU9250_ConfigMag(MPU9250_Handle *handle, uint8_t mode);
- 
- // Data reading functions
- void MPU9250_ReadAccel(MPU9250_Handle *handle, float accel[3]);
- void MPU9250_ReadGyro(MPU9250_Handle *handle, float gyro[3]);
- void MPU9250_ReadMag(MPU9250_Handle *handle, float mag[3]);
- void MPU9250_ReadAll(MPU9250_Handle *handle, float accel[3], float gyro[3], float mag[3]);
- 
- // Low-level functions
- uint8_t MPU9250_ReadRegister(MPU9250_Handle *handle, uint8_t reg);
- void MPU9250_WriteRegister(MPU9250_Handle *handle, uint8_t reg, uint8_t value);
- uint8_t MPU9250_MagReadRegister(MPU9250_Handle *handle, uint8_t reg);
- void MPU9250_MagWriteRegister(MPU9250_Handle *handle, uint8_t reg, uint8_t value);
 
  #endif /* COMPONENTS_MYDRIVERS_INC_MPU9250_H_ */

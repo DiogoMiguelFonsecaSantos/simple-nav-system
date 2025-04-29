@@ -59,8 +59,8 @@ void PIN_SetPinAsOutput(PIN_ValueType pinId){
 void PIN_InitGPIO_OutputPin(PIN_ValueType pinId){
 
     
-    PIN_Direction(pinId, OUTPUT); // Set GPIO 12 as output
-    GPIO_EnableOutput(pinId);
+    PIN_Direction(pinId, OUTPUT); // Set output
+    PIN_SetPinAsOutput(pinId);
     PINCONFIG_Function(pinId, F2_GPIO); // Set function to GPIO
     PINCONFIG_SetDriveStrength(pinId, MEDIUM); // Set drive strength to 2
 

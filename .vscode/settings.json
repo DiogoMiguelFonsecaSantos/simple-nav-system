@@ -7,6 +7,7 @@
         "spi_driver.h": "c",
         "regs_spi_controller.h": "c",
         "spi_hal.h": "c",
-        "gpio_matrix.h": "c"
+        "gpio_matrix.h": "c",
+        "regs_spi_peripheral.h": "c"
     }
 }

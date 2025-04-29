@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include "regs_spi_controller.h"
+#include "regs_spi_peripheral.h"
 
 void SPI_HAL_TriggerOperation(GenericSPI_Type *SPIx);
 bool SPI_HAL_IsBusy(GenericSPI_Type *SPIx);
@@ -111,7 +111,7 @@ bool SPI_HAL_IsCs1Enabled(GenericSPI_Type *SPIx);
 void SPI_HAL_SetCs0Enabled(GenericSPI_Type *SPIx, bool enable);
 bool SPI_HAL_IsCs0Enabled(GenericSPI_Type *SPIx);
 void SPI_HAL_ResetSync(GenericSPI_Type *SPIx);
-void SPI_HAL_SetSlaveMode(GenericSPI_Type *SPIx, bool enable);
+void SPI_HAL_SetSlaveOrMaster(GenericSPI_Type *SPIx, bool enable);
 bool SPI_HAL_IsSlaveMode(GenericSPI_Type *SPIx);
 void SPI_HAL_SetWriteReadBufferEnabled(GenericSPI_Type *SPIx, bool enable);
 bool SPI_HAL_IsWriteReadBufferEnabled(GenericSPI_Type *SPIx);

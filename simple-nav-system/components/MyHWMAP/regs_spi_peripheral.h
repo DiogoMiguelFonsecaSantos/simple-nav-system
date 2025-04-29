@@ -1,12 +1,12 @@
 /*
- * regs_spi_controller.h
+ * regs_spi_peripheral.h
  *
  *  Created on: 24/04/2025
  *      Author: Diogo
  */
 
- #ifndef COMPONENTS_MYHWMAP_REGS_SPI_CONTROLLER_H_
- #define COMPONENTS_MYHWMAP_REGS_SPI_CONTROLLER_H_
+ #ifndef COMPONENTS_MYHWMAP_REGS_SPI_PERIPHERAL_H_
+ #define COMPONENTS_MYHWMAP_REGS_SPI_PERIPHERAL_H_
  
  #include <stdint.h>
  
@@ -118,4 +118,4 @@ typedef struct {
 #define SPI2 ((GenericSPI_Type *)SPI2_BASE)
 #define SPI3 ((GenericSPI_Type *)SPI3_BASE)
 
-#endif /* COMPONENTS_MYHWMAP_REGS_SPI_CONTROLLER_H_ */
+#endif /* COMPONENTS_MYHWMAP_REGS_SPI_PERIPHERAL_H_ */

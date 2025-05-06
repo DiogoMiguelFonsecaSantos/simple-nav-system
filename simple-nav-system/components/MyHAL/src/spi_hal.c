@@ -11,12 +11,6 @@
 /*SPI_CMD_REG (0x0)*/
 
 void SPI_HAL_TriggerOperation(GenericSPI_Type *SPIx) {
-    // Trigger the SPI operation (read/write)
-    if(SPI_HAL_IsBusy(SPIx)) {
-        // If the SPI is busy, return without triggering the operation
-        printf("SPI is busy, cannot trigger operation.\n");
-        return;
-    }
     SPIx->CMD |= (1 << 18);
 }
 
@@ -271,7 +265,7 @@ void SPI_HAL_EnableCommandPhase(GenericSPI_Type *SPIx, bool enable) {
 }
 
 // Function to enable or disable the address phase (SPI_USR_ADDR)
-void SPI_HAL_EnableAddressPhase(GenericSPI_Type *SPIx, bool enable) {
+void    SPI_HAL_EnableAddressPhase(GenericSPI_Type *SPIx, bool enable) {
     if (enable) {
         SPIx->USER |= (1 << 30); // Set SPI_USR_ADDR to 1
     } else {
@@ -999,9 +993,7 @@ uint32_t SPI_HAL_GetReadDataBitLength(GenericSPI_Type *SPIx) {
 
 // Function to set the value of a specific SPI_Wn_REG
 void SPI_HAL_SetDataBuffer(GenericSPI_Type *SPIx, uint8_t index, uint32_t value) {
-    if (index < 16) { // Ensure the index is within the valid range (0–15)
-        *((&SPIx->W0) + index) = value; // Adding index to &SPIx->W0 effectively moves the pointer by index * sizeof(uint32_t) bytes.
-    }
+    SPIx->W0 = value; // Write the value to the appropriate SPI_Wn_REG.
 }
 
 // Function to get the value of a specific SPI_Wn_REG
@@ -1015,7 +1007,7 @@ uint32_t SPI_HAL_GetDataBuffer(GenericSPI_Type *SPIx, uint8_t index) {
 
 
 
-/* SPI_EXT2_REG (0xF8) */
+/* SPI_EXT2_REG (0xF8) */   
 
 // Function to get the current state of the SPI state machine (SPI_ST)
 uint8_t SPI_HAL_GetState(GenericSPI_Type *SPIx) {

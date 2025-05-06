@@ -10,6 +10,7 @@
 #include "regs_rstClock.h"
 #include "rstClock.h"
 #include "regs_spi_peripheral.h"
+#include <stdio.h>
 
 
 void PWR_CLKGTING_EnableSPIClk(int spiNum) {
@@ -26,6 +27,7 @@ void PWR_CLKGTING_EnableSPIClk(int spiNum) {
             break;
         case 3:
             DPORT_PERIP_CLK_EN_REG |= (1 << 16); // Enable clock for SPI3
+            printf("PORT_PERIP_CLK_EN_SPI3");
             break;
         default:
             // Invalid SPI number, do nothing
@@ -73,7 +75,7 @@ void PWR_CLKGTING_ResetSPIClk(int spiNum) {
             DPORT_PERIP_RST_EN_REG &= ~(1 << 6);
             break;
         case 3:
-            DPORT_PERIP_RST_EN_REG &= ~(1 << 16);
+            DPORT_PERIP_RST_EN_REG &= ~(1 << 16); 
             DPORT_PERIP_RST_EN_REG |= (1 << 16); 
             DPORT_PERIP_RST_EN_REG &= ~(1 << 16);
             break;

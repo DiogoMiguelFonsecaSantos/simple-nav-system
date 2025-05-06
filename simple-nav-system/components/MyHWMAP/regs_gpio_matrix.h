@@ -50,7 +50,7 @@ typedef struct {
     __IO uint32_t OUT1;          // 0x10 - GPIO 32-39 output                (R/W)
     __O  uint32_t OUT1_W1TS;     // 0x14 - GPIO 32-39 bit set               (WO)
     __O  uint32_t OUT1_W1TC;     // 0x18 - GPIO 32-39 bit clear             (WO)
-         uint32_t RESERVED1;     // 0x1C - Reserved
+         uint32_t RESERVED1;       // 0x1C - Reserved
     __IO uint32_t ENABLE;        // 0x20 - GPIO 0-31 output enable          (R/W)
     __O  uint32_t ENABLE_W1TS;   // 0x24 - GPIO 0-31 enable set             (WO)
     __O  uint32_t ENABLE_W1TC;   // 0x28 - GPIO 0-31 enable clear           (WO)

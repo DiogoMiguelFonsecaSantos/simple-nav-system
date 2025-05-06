@@ -130,7 +130,7 @@ void SPIProtocol_SetMasterMode(GenericSPI_Type *SPIx, int mode);
 
 void SPI_PinsConfig();
 
-void SPIProtocol_Init(GenericSPI_Type *SPIx, int len, uint8_t preDivider, uint8_t div, int mode);
+void SPIProtocol_Init(GenericSPI_Type *SPIx, uint8_t preDivider, uint16_t div, int mode);
 void SPI_ISR_Handler(GenericSPI_Type *SPIx);
 void SPIProtocol_TriggerOperation(GenericSPI_Type *SPIx);
 void SPIProtocol_SendData(GenericSPI_Type *SPIx, const uint8_t *data, uint32_t length);

@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "SimpleNavSys",
-    "project_version":    "694ea55-dirty",
+    "project_version":    "15cd8b7-dirty",
     "project_path":       "C:/SNS/PFC/simple-nav-system",
     "idf_path":           "C:/Espressif/frameworks/esp-idf-v5.3.1",
     "build_dir":          "C:/SNS/PFC/simple-nav-system/build",
@@ -35,7 +35,7 @@
             "dir": "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS",
             "type": "LIBRARY",
             "lib": "__idf_MyDRIVERS",
-            "reqs": [ "MyHAL" ],
+            "reqs": [ "MyHAL", "driver" ],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
@@ -55,7 +55,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "C:/SNS/PFC/simple-nav-system/build/esp-idf/MyHAL/libMyHAL.a",
-            "sources": [ "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/gpio_matrix.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/pin.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/pinconfig.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/io_mux.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/spi_hal.c" ],
+            "sources": [ "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/gpio_matrix.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/pin.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/pinconfig.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/io_mux.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/spi_hal.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/rstClock.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/pwrAndclockGating.c" ],
             "include_dirs": [ "inc", "../MyHWMAP" ]
         },
         "app_trace": {
@@ -2829,7 +2829,7 @@
             "prefix": "idf",
             "dir": "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS",
             "lib": "__idf_MyDRIVERS",
-            "reqs": [ "MyHAL" ],
+            "reqs": [ "MyHAL", "driver" ],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],

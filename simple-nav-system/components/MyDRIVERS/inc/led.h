@@ -10,23 +10,13 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include "gpio_matrix.h"
-#include "regs_gpio_matrix.h"
-#include "io_mux.h"
-#include "pinconfig.h"
-#include "pin.h"
-
-typedef enum {
-    OFF = 0,
-    ON = 1
-}LEDState;
 
 /**
  * @brief Initializes the LED with the specified initial state.
  * 
  * @param state Initial state of the LED (true for ON, false for OFF).
  */
-void LED_Init(LEDState state);
+void LED_Init(bool state);
 
 /**
  * @brief Retrieves the current state of the LED.

@@ -1,148 +1,85 @@
-/*
- * mpu9250.h
- *
- *  Created on: 26/04/2025
- *      Author: Diogo
- */
+#ifndef COMPONENTS_MYDRIVERS_INC_MPU9250_H_
+#define COMPONENTS_MYDRIVERS_INC_MPU9250_H_
 
- #ifndef COMPONENTS_MYDRIVERS_INC_MPU9250_H_
- #define COMPONENTS_MYDRIVERS_INC_MPU9250_H_
- 
- #include <stdint.h>
- #include "spi_driver.h"
- #include <stdbool.h>
- 
- // MPU9250 Register Definitions
- #define SELF_TEST_X_GYRO      0x00
- #define SELF_TEST_Y_GYRO      0x01
- #define SELF_TEST_Z_GYRO      0x02
- #define SELF_TEST_X_ACCEL     0x0D
- #define SELF_TEST_Y_ACCEL     0x0E 
- #define SELF_TEST_Z_ACCEL     0x0F
- #define XG_OFFSET_H           0x13
- #define XG_OFFSET_L           0x14
- #define YG_OFFSET_H           0x15
- #define YG_OFFSET_L           0x16 
- #define ZG_OFFSET_H           0x17
- #define ZG_OFFSET_L           0x18
- #define SMPLRT_DIV            0x19
- #define CONFIG                0x1A
- #define GYRO_CONFIG           0x1B
- #define ACCEL_CONFIG          0x1C
- #define ACCEL_CONFIG_2        0x1D
- #define LP_ACCEL_ODR          0x1E
- #define WOM_THR               0x1F
- #define FIFO_EN               0x23
- #define I2C_MST_CTRL          0x24  // I2C Master Control
- #define I2C_SLV0_ADDR         0x25  // I2C Slave 0 Address
- #define I2C_SLV0_REG          0x26  // I2C Slave 0 Register
- #define I2C_SLV0_CTRL         0x27  // I2C Slave 0 Control
- #define I2C_SLV1_ADDR         0x28  // I2C Slave 1 Address
- #define I2C_SLV1_REG          0x29  // I2C Slave 1 Register
- #define I2C_SLV1_CTRL         0x2A  // I2C Slave 1 Control
- #define I2C_SLV2_ADDR         0x2B  // I2C Slave 2 Address
- #define I2C_SLV2_REG          0x2C  // I2C Slave 2 Register
- #define I2C_SLV2_CTRL         0x2D  // I2C Slave 2 Control
- #define I2C_SLV3_ADDR         0x2E  // I2C Slave 3 Address
- #define I2C_SLV3_REG          0x2F  // I2C Slave 3 Register
- #define I2C_SLV3_CTRL         0x30  // I2C Slave 3 Control
- #define I2C_SLV4_ADDR         0x31  // I2C Slave 4 Address
- #define I2C_SLV4_REG          0x32  // I2C Slave 4 Register
- #define I2C_SLV4_DO           0x33  // I2C Slave 4 Data Out
- #define I2C_SLV4_CTRL         0x34  // I2C Slave 4 Control
- #define I2C_SLV4_DI           0x35
- #define I2C_MST_STATUS        0x36
- #define INT_PIN_CFG           0x37
- #define INT_ENABLE            0x38
- #define INT_STATUS            0x3A
- #define ACCEL_XOUT_H          0x3B
- #define ACCEL_XOUT_L          0x3C
- #define ACCEL_YOUT_H          0x3D
- #define ACCEL_YOUT_L          0x3E
- #define ACCEL_ZOUT_H          0x3F
- #define ACCEL_ZOUT_L          0x40
- #define TEMP_OUT_H            0x41
- #define TEMP_OUT_L            0x42
- #define GYRO_XOUT_H           0x43
- #define GYRO_XOUT_L           0x44
- #define GYRO_YOUT_H           0x45
- #define GYRO_YOUT_L           0x46
- #define GYRO_ZOUT_H           0x47
- #define GYRO_ZOUT_L           0x48
- #define EXT_SENS_DATA_00      0x49
- #define EXT_SENS_DATA_01      0x4A
- #define EXT_SENS_DATA_02      0x4B
- #define EXT_SENS_DATA_03      0x4C
- #define EXT_SENS_DATA_04      0x4D
- #define EXT_SENS_DATA_05      0x4E
- #define EXT_SENS_DATA_06      0x4F
- #define EXT_SENS_DATA_07      0x50
- #define EXT_SENS_DATA_08      0x51
- #define EXT_SENS_DATA_09      0x52
- #define EXT_SENS_DATA_10      0x53
- #define EXT_SENS_DATA_11      0x54
- #define EXT_SENS_DATA_12      0x55
- #define EXT_SENS_DATA_13      0x56
- #define EXT_SENS_DATA_14      0x57
- #define EXT_SENS_DATA_15      0x58
- #define EXT_SENS_DATA_16      0x59
- #define EXT_SENS_DATA_17      0x5A
- #define EXT_SENS_DATA_18      0x5B
- #define EXT_SENS_DATA_19      0x5C
- #define EXT_SENS_DATA_20      0x5D
- #define EXT_SENS_DATA_21      0x5E
- #define EXT_SENS_DATA_22      0x5F
- #define EXT_SENS_DATA_23      0x60
- #define I2C_SLV0_DO          0x63  // I2C Slave 0 Data Out
- #define I2C_SLV1_DO          0x64  // I2C Slave 1 Data Out
- #define I2C_SLV2_DO          0x65  // I2C Slave 2 Data Out
- #define I2C_SLV3_DO          0x66  // I2C Slave 3 Data Out
- #define I2C_MST_DELAY_CTRL   0x67  // I2C Master Delay Control
- #define SIGNAL_PATH_RESET     0x68
- #define MOT_DETECT_CTRL       0x69
- #define USER_CTRL             0x6A
- #define PWR_MGMT_1            0x6B
- #define PWR_MGMT_2            0x6C
- #define FIFO_COUNTH           0x72
- #define FIFO_COUNTL           0x73
- #define FIFO_R_W              0x74
- #define WHO_AM_I              0x75
- #define XA_OFFSET_H           0x77
- #define XA_OFFSET_L           0x78
- #define YA_OFFSET_H           0x7A
- #define YA_OFFSET_L           0x7B
- #define ZA_OFFSET_H           0x7D
- #define ZA_OFFSET_L           0x7E
+#include <stdint.h>
+#include "esp_err.h"
 
-         /* AK8963 Registers */
- #define WIA                   0x00
- #define INFO                  0x01
- #define ST1                   0x02
- #define HXL                   0x03
- #define HXH                   0x04
- #define HYL                   0x05
- #define HYH                   0x06
- #define HZL                   0x07
- #define HZH                   0x08
- #define ST2                   0x09
- #define CNTL                  0X0A
- #define RSV                   0x0B
- #define ASTC                  0x0C
- #define TS1                   0x0D
- #define TS2                   0x0E
- #define I2CDIS                0x0F
- #define ASAX                  0X10
- #define ASAY                  0x11
- #define ASAZ                  0x12
+#define MPU9250_USER_CTRL_REG 0x6A       // User Control Register
+#define MPU9250_I2C_MST_CTRL_REG 0x24   // I2C Master Control Register
 
- // Function Prototypes
-bool MPU9250_Init(GenericSPI_Type *SPIx);
-bool MPU9250_ReadAccel(GenericSPI_Type *SPIx, int16_t *accelX, int16_t *accelY, int16_t *accelZ);
-bool MPU9250_ReadGyro(GenericSPI_Type *SPIx, int16_t *gyroX, int16_t *gyroY, int16_t *gyroZ);
-bool MPU9250_ReadTemp(GenericSPI_Type *SPIx, int16_t *temp);
-bool MPU9250_WhoAmI(GenericSPI_Type *SPIx, uint8_t *id);
+// MPU-9250 Register Definitions
+#define MPU9250_ACCEL_XOUT_H_REG 0x3B
+#define MPU9250_ACCEL_XOUT_L_REG 0x3C
+#define MPU9250_ACCEL_YOUT_H_REG 0x3D
+#define MPU9250_ACCEL_YOUT_L_REG 0x3E
+#define MPU9250_ACCEL_ZOUT_H_REG 0x3F
+#define MPU9250_ACCEL_ZOUT_L_REG 0x40
 
+#define MPU9250_TEMP_OUT_H_REG 0x41
+#define MPU9250_TEMP_OUT_L_REG 0x42
 
+#define MPU9250_GYRO_XOUT_H_REG 0x43
+#define MPU9250_GYRO_XOUT_L_REG 0x44
+#define MPU9250_GYRO_YOUT_H_REG 0x45
+#define MPU9250_GYRO_YOUT_L_REG 0x46
+#define MPU9250_GYRO_ZOUT_H_REG 0x47
+#define MPU9250_GYRO_ZOUT_L_REG 0x48
 
+#define AK8963_WIA_REG 0x00       // Device ID
+#define AK8963_INFO_REG 0x01      // Information
+#define AK8963_ST1_REG 0x02       // Status 1
+#define AK8963_HXL_REG 0x03       // X-axis data low byte
+#define AK8963_HXH_REG 0x04       // X-axis data high byte
+#define AK8963_HYL_REG 0x05       // Y-axis data low byte
+#define AK8963_HYH_REG 0x06       // Y-axis data high byte
+#define AK8963_HZL_REG 0x07       // Z-axis data low byte
+#define AK8963_HZH_REG 0x08       // Z-axis data high byte
+#define AK8963_ST2_REG 0x09       // Status 2
+#define AK8963_CNTL_REG 0x0A      // Control
+#define AK8963_ASAX_REG 0x10      // X-axis sensitivity adjustment value
+#define AK8963_ASAY_REG 0x11      // Y-axis sensitivity adjustment value
+#define AK8963_ASAZ_REG 0x12      // Z-axis sensitivity adjustment valuefine MPU9250_I2C_MST_CTRL_REG 0x24
+#define MPU9250_INT_PIN_CFG_REG 0x37
 
- #endif /* COMPONENTS_MYDRIVERS_INC_MPU9250_H_ */
+// Scale factors
+#define ACCEL_SCALE 16384.0 // Assuming ±2g range (LSB/g)
+#define GYRO_SCALE 131.0    // Assuming ±250°/s range (LSB/°/s)
+#define TEMP_SENSITIVITY 333.87
+#define TEMP_OFFSET 21.0
+
+#define MAGNETOMETER_SCALE 0.15f // Example scale factor (µT/LSB)
+
+// Struct to hold sensor data
+typedef struct {
+    float accel_x;
+    float accel_y;
+    float accel_z;
+
+    float gyro_x;
+    float gyro_y;
+    float gyro_z;
+
+    float mag_x;
+    float mag_y;
+    float mag_z;
+
+    float temperature;
+
+    float pitch;
+    float roll;
+    float yaw;
+
+    float sample_time; // Time between samples in seconds
+} mpu9250_data_t;
+
+// Function Prototypes
+esp_err_t MPU9250Init(void);
+esp_err_t MPU9250ReadAllData(mpu9250_data_t *data);
+esp_err_t MPU9250ReadAccelerometerRaw(int16_t *x, int16_t *y, int16_t *z);
+esp_err_t MPU9250ReadGyroscopeRaw(int16_t *x, int16_t *y, int16_t *z);
+esp_err_t MPU9250ReadTemperature(float *temp);
+esp_err_t MPU9250WriteRegister(uint8_t reg, uint8_t value);
+esp_err_t MPU9250ReadRegister(uint8_t reg, uint8_t *value);
+esp_err_t AK8963Init(void);
+
+#endif /* COMPONENTS_MYDRIVERS_INC_MPU9250_H_ */

@@ -6,47 +6,54 @@
  */
 
 #include "led.h"
+#include "driver/gpio.h"
 #include "pin.h"
 #include "pinconfig.h"
 
 // Define the GPIO pin for the LED
 #define LED_PIN 22 // GPIO22 on the ESP32
-// The LED is Active-Low
 
-void LED_Init(LEDState state){
+static bool ledState = false; // Tracks the current state of the LED
 
-    PIN_Reset(LED_PIN); // Reset GPIO 12
-    PIN_InitGPIO_OutputPin(LED_PIN); // Initialize GPIO 12 as output
-    
+void LED_Init(bool state) {
+    // Configure the LED pin as an output
+    gpio_reset_pin(LED_PIN);
+    PIN_SetDirection(LED_PIN, OUTPUT);
+	
     // Set the initial state of the LED
-    if (state == ON) {
-        PIN_Clear(LED_PIN);
+    if (state) {
+        PIN_Set(LED_PIN);
+        ledState = true;
     } else {
-		PIN_Set(LED_PIN);
+        PIN_Clear(LED_PIN);
+        ledState = false;
     }
 }
 
 bool LED_GetState(void) {
-    // Read the current state of the LED pin
-    return !PIN_Value(LED_PIN);
+    // Return the current state of the LED
+    return PIN_GetLevel(LED_PIN);
 }
 
 void LED_On(void) {
     // Turn the LED ON
-    PIN_Clear(LED_PIN);
+    PIN_Set(LED_PIN);
+    ledState = true;
 }
 
 void LED_Off(void) {
     // Turn the LED OFF
-    PIN_Set(LED_PIN);
+    PIN_Clear(LED_PIN);
+    ledState = false;
 }
 
 void LED_Toggle(void) {
-    // Toggle the state of the LED
-    if (LED_GetState()) {
-        LED_Off();
-        
+    // Toggle the LED state
+    if (ledState) {
+        PIN_Clear(LED_PIN);
+        ledState = false;
     } else {
-        LED_On();
+        PIN_Set(LED_PIN);
+        ledState = true;
     }
 }

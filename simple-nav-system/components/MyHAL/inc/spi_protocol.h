@@ -21,10 +21,13 @@
  #define PIN_NUM_MISO GPIO_NUM_19
  #define PIN_NUM_MOSI GPIO_NUM_23
  #define PIN_NUM_CLK GPIO_NUM_18
- #define PIN_NUM_CS GPIO_NUM_5
+ #define PIN_NUM_CS_MPU GPIO_NUM_5
+ #define PIN_NUM_CS_EPAPER GPIO_NUM_16
  
  // Function Prototypes
  esp_err_t SPI_PROTOCOLInit(void);
- esp_err_t SPI_PROTOCOLTransmit(uint8_t *tx_data, uint8_t *rx_data, size_t length);
+ esp_err_t SPI_PROTOCOLTransmit_MPU(uint8_t *tx_data, uint8_t *rx_data, size_t length);
+ esp_err_t SPI_PROTOCOLTransmit_EPAPER_Command(uint8_t cmd);
+ esp_err_t SPI_PROTOCOLTransmit_EPAPER_Data(const uint8_t *data, size_t length);
  
  #endif /* COMPONENTS_MYHAL_INC_SPI_PROTOCOL_H_ */

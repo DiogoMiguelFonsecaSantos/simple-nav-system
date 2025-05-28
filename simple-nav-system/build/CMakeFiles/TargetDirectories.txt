@@ -817,6 +817,13 @@ C:/SNS/PFC/simple-nav-system/build/esp-idf/MyHAL/CMakeFiles/list_install_compone
 C:/SNS/PFC/simple-nav-system/build/esp-idf/MyHAL/CMakeFiles/install.dir
 C:/SNS/PFC/simple-nav-system/build/esp-idf/MyHAL/CMakeFiles/install/local.dir
 C:/SNS/PFC/simple-nav-system/build/esp-idf/MyHAL/CMakeFiles/install/strip.dir
+C:/SNS/PFC/simple-nav-system/build/esp-idf/MyFONTS/CMakeFiles/__idf_MyFONTS.dir
+C:/SNS/PFC/simple-nav-system/build/esp-idf/MyFONTS/CMakeFiles/edit_cache.dir
+C:/SNS/PFC/simple-nav-system/build/esp-idf/MyFONTS/CMakeFiles/rebuild_cache.dir
+C:/SNS/PFC/simple-nav-system/build/esp-idf/MyFONTS/CMakeFiles/list_install_components.dir
+C:/SNS/PFC/simple-nav-system/build/esp-idf/MyFONTS/CMakeFiles/install.dir
+C:/SNS/PFC/simple-nav-system/build/esp-idf/MyFONTS/CMakeFiles/install/local.dir
+C:/SNS/PFC/simple-nav-system/build/esp-idf/MyFONTS/CMakeFiles/install/strip.dir
 C:/SNS/PFC/simple-nav-system/build/esp-idf/MyDRIVERS/CMakeFiles/__idf_MyDRIVERS.dir
 C:/SNS/PFC/simple-nav-system/build/esp-idf/MyDRIVERS/CMakeFiles/edit_cache.dir
 C:/SNS/PFC/simple-nav-system/build/esp-idf/MyDRIVERS/CMakeFiles/rebuild_cache.dir

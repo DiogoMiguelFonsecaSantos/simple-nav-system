@@ -1,0 +1,34 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.1.1 Chrome/132.0.6834.210 Electron/34.3.3 Safari/537.36" version="26.1.1">
+  <diagram name="Page-1" id="H4In-ABZrUr2OvOwVcPQ">
+    <mxGraphModel dx="1050" dy="621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UhXIX0nOBtcQJprqGoC--1" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;Timer Service&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="260" width="130" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="UhXIX0nOBtcQJprqGoC--4" value="Temperature Data&lt;div&gt;Humidity Data&lt;/div&gt;&lt;div&gt;Pressure Data&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="370" y="275" width="130" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="UhXIX0nOBtcQJprqGoC--5" value="Timer Data Struct" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="250" width="130" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="UhXIX0nOBtcQJprqGoC--9" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1.009;entryY=0.173;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="UhXIX0nOBtcQJprqGoC--6" target="UhXIX0nOBtcQJprqGoC--4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UhXIX0nOBtcQJprqGoC--6" value="Task 1" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="160" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="UhXIX0nOBtcQJprqGoC--10" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="UhXIX0nOBtcQJprqGoC--7" target="UhXIX0nOBtcQJprqGoC--4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="UhXIX0nOBtcQJprqGoC--7" value="Task 2" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="640" y="390" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="UhXIX0nOBtcQJprqGoC--13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.006;entryY=0.397;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="UhXIX0nOBtcQJprqGoC--1" target="UhXIX0nOBtcQJprqGoC--4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

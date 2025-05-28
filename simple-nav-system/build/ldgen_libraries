@@ -80,5 +80,6 @@ C:/SNS/PFC/simple-nav-system/build/esp-idf/perfmon/libperfmon.a
 C:/SNS/PFC/simple-nav-system/build/esp-idf/spiffs/libspiffs.a
 C:/SNS/PFC/simple-nav-system/build/esp-idf/wifi_provisioning/libwifi_provisioning.a
 C:/SNS/PFC/simple-nav-system/build/esp-idf/MyHAL/libMyHAL.a
+C:/SNS/PFC/simple-nav-system/build/esp-idf/MyFONTS/libMyFONTS.a
 C:/SNS/PFC/simple-nav-system/build/esp-idf/MyDRIVERS/libMyDRIVERS.a
 C:/SNS/PFC/simple-nav-system/build/esp-idf/main/libmain.a

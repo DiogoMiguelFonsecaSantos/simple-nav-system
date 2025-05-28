@@ -9,6 +9,13 @@
         "spi_hal.h": "c",
         "gpio_matrix.h": "c",
         "regs_spi_peripheral.h": "c",
-        "pwrandclockgating.h": "c"
-    }
+        "pwrandclockgating.h": "c",
+        "u8g2_fonts.c": "cpp",
+        "string.h": "c",
+        "stdbool.h": "c"
+    },
+    "idf.pythonInstallPath": "C:\\Espressif\\tools\\idf-python\\3.11.2\\python.exe",
+    "idf.espIdfPathWin": "C:/Espressif/frameworks/esp-idf-v5.3.1/",
+    "idf.toolsPathWin": "C:\\Espressif",
+    "idf.portWin": "COM8"
 }

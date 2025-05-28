@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -12,6 +10,7 @@
 #include "esp_system.h"
 #include "esp_err.h"
 #include "esp_log.h"
+#include "epaper.h"
 
 #define LED_RED 26
 #define LED_YELLOW 27
@@ -75,10 +74,25 @@ void app_main(void)
     //Set struct sample time to 20 ms
     imuData.sample_time = 0.02f; // 20 ms
 
+    // Initialize the e-paper display
+    if (EPAPER_Init() != ESP_OK) {
+        ESP_LOGE("MAIN", "Failed to initialize e-paper display");
+        return;
+    }
+
+    printf("EPAPER initialized successfully.\n");
+
     xTaskCreate(&internalBlink, "internalBlink", 2048, NULL, 5, NULL);
 
-    int i = 0;
+    vTaskDelay(pdMS_TO_TICKS(3000));
 
+    // Clear the e-paper display
+    if (EPAPER_Clear() != ESP_OK) {
+        ESP_LOGE("MAIN", "Failed to clear e-paper display");
+        return;
+    }
+
+    int i = 0;
     while (1) {
         esp_err_t retVal = MPU9250ReadAllData(&imuData);
         if (retVal != ESP_OK) {
@@ -97,4 +111,5 @@ void app_main(void)
         }
         
     }
+
 }

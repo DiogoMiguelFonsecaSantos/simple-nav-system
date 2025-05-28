@@ -11,7 +11,7 @@ esp_err_t MPU9250WriteRegister(uint8_t reg, uint8_t value) {
     uint8_t rx_data[2] = { 0 };
 
     // Transmit data over SPI
-    return SPI_PROTOCOLTransmit(tx_data, rx_data, sizeof(tx_data));
+    return SPI_PROTOCOLTransmit_MPU(tx_data, rx_data, sizeof(tx_data));
 }
 
 esp_err_t MPU9250ReadRegister(uint8_t reg, uint8_t *value) {
@@ -19,7 +19,7 @@ esp_err_t MPU9250ReadRegister(uint8_t reg, uint8_t *value) {
     uint8_t rx_data[2] = { 0 };
 
     // Transmit data over SPI
-    esp_err_t ret = SPI_PROTOCOLTransmit(tx_data, rx_data, sizeof(tx_data));
+    esp_err_t ret = SPI_PROTOCOLTransmit_MPU(tx_data, rx_data, sizeof(tx_data));
     if (ret == ESP_OK) {
         *value = rx_data[1]; // The second byte contains the register value
     }

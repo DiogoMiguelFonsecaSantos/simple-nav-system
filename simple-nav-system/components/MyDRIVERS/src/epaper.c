@@ -6,7 +6,6 @@
  */
 
 #include "epaper.h"
-#include "spi_protocol.h"
 #include "driver/gpio.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
@@ -18,7 +17,6 @@
 
 //Hardware Reset: Toggle the display’s RST pin low and then high (e.g. 10 ms each) to reset the controller
 //Software Reset: SW Reset (0x12): Send the software-reset command and wait briefly.
-
 
 void EPAPER_WriteCMD(uint8_t cmd) {
     gpio_set_level(EPAPER_DC_PIN, 0);

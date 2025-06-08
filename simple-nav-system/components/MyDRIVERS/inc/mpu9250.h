@@ -6,6 +6,7 @@
 
 #define MPU9250_USER_CTRL_REG 0x6A       // User Control Register
 #define MPU9250_I2C_MST_CTRL_REG 0x24   // I2C Master Control Register
+#define MPU9250_WHO_AM_I_REG 0x75
 
 // MPU-9250 Register Definitions
 #define MPU9250_ACCEL_XOUT_H_REG 0x3B
@@ -65,6 +66,8 @@ typedef struct {
 
     float temperature;
 
+    uint8_t who_am_i;
+
     float pitch;
     float roll;
     float yaw;
@@ -75,6 +78,7 @@ typedef struct {
 // Function Prototypes
 esp_err_t MPU9250Init(void);
 esp_err_t MPU9250ReadAllData(mpu9250_data_t *data);
+esp_err_t MPU9250_ReadWhoAmI(mpu9250_data_t *data);
 esp_err_t MPU9250ReadAccelerometerRaw(int16_t *x, int16_t *y, int16_t *z);
 esp_err_t MPU9250ReadGyroscopeRaw(int16_t *x, int16_t *y, int16_t *z);
 esp_err_t MPU9250ReadTemperature(float *temp);

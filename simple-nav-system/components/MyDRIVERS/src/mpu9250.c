@@ -107,6 +107,10 @@ esp_err_t AK8963Init(void) {
     return ESP_OK;
 }
 
+esp_err_t MPU9250_ReadWhoAmI(mpu9250_data_t *data){
+    return MPU9250ReadRegister(MPU9250_WHO_AM_I_REG, &data->who_am_i);
+}
+
 esp_err_t MPU9250ReadAccelerometerRaw(int16_t *x, int16_t *y, int16_t *z) {
     uint8_t data[6]; // Buffer to store raw data from the accelerometer registers
      

@@ -12,7 +12,10 @@
         "pwrandclockgating.h": "c",
         "u8g2_fonts.c": "cpp",
         "string.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "spi_protocol.h": "c",
+        "mpu9250.h": "c",
+        "stdint.h": "c"
     },
     "idf.pythonInstallPath": "C:\\Espressif\\tools\\idf-python\\3.11.2\\python.exe",
     "idf.espIdfPathWin": "C:/Espressif/frameworks/esp-idf-v5.3.1/",

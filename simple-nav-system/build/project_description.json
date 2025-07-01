@@ -1,7 +1,7 @@
 {
     "version":            "1.1",
     "project_name":       "SimpleNavSys",
-    "project_version":    "54ab9c3-dirty",
+    "project_version":    "33120ea-dirty",
     "project_path":       "C:/SNS/PFC/simple-nav-system",
     "idf_path":           "C:/Espressif/frameworks/esp-idf-v5.3.1",
     "build_dir":          "C:/SNS/PFC/simple-nav-system/build",
@@ -35,12 +35,12 @@
             "dir": "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS",
             "type": "LIBRARY",
             "lib": "__idf_MyDRIVERS",
-            "reqs": [ "MyHAL", "MyFONTS" ],
+            "reqs": [ "MyHAL", "MyFONTS", "nvs_flash", "esp_timer" ],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "C:/SNS/PFC/simple-nav-system/build/esp-idf/MyDRIVERS/libMyDRIVERS.a",
-            "sources": [ "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/spi_driver.c", "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/mpu9250.c", "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/led.c", "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/epaper.c" ],
+            "sources": [ "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/rotary_encoder.c", "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/mpu9250.c", "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/led.c", "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/epaper.c", "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/gps.c", "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/ring_buffer.c", "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/flash_store.c", "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/lcd16x2.c", "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS/src/lcd16x2_hw.c" ],
             "include_dirs": [ "inc" ]
         },
         "MyFONTS": {
@@ -70,7 +70,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [],
             "file": "C:/SNS/PFC/simple-nav-system/build/esp-idf/MyHAL/libMyHAL.a",
-            "sources": [ "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/spi_protocol.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/pin.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/pinconfig.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/clockpwr.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/uart.c" ],
+            "sources": [ "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/spi_protocol.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/pin.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/pinconfig.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/clockpwr.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/uart.c", "C:/SNS/PFC/simple-nav-system/components/MyHAL/src/i2c_protocol.c" ],
             "include_dirs": [ "inc" ]
         },
         "app_trace": {
@@ -2844,7 +2844,7 @@
             "prefix": "idf",
             "dir": "C:/SNS/PFC/simple-nav-system/components/MyDRIVERS",
             "lib": "__idf_MyDRIVERS",
-            "reqs": [ "MyHAL", "MyFONTS" ],
+            "reqs": [ "MyHAL", "MyFONTS", "nvs_flash", "esp_timer" ],
             "priv_reqs": [],
             "managed_reqs": [],
             "managed_priv_reqs": [],

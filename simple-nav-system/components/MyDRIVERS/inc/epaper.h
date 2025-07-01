@@ -16,26 +16,26 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include <string.h>
-#include "C:\SNS\PFC\simple-nav-system\components\MyFONTS\inc\epaper_fonts.h" 
-#include "C:\SNS\PFC\simple-nav-system\components\MyFONTS\inc\epaper-29-ws.h"
-#include "C:\SNS\PFC\simple-nav-system\components\MyFONTS\inc\u8g2.h"
-#include "C:\SNS\PFC\simple-nav-system\components\MyFONTS\inc\u8x8.h"
+//#include "C:\SNS\PFC\simple-nav-system\components\MyFONTS\inc\epaper_fonts.h" 
+//#include "C:\SNS\PFC\simple-nav-system\components\MyFONTS\inc\epaper-29-ws.h"
+//#include "C:\SNS\PFC\simple-nav-system\components\MyFONTS\inc\u8g2.h"
+//#include "C:\SNS\PFC\simple-nav-system\components\MyFONTS\inc\u8x8.h"
 
 // Pin definitions (match your hardware layout)
 // Hardware wiring
-// Purple = BUSY - GPIO15
+// Purple = BUSY - GPIO04
 // Orange = RST  - GPIO22
-// White  = D/C  - GPIO17
-// Blue   = CS   - GPIO16 (controlled by spi_protocol.c)
+// White  = D/C  - GPIO02
+// Blue   = CS   - GPIO12 (controlled by spi_protocol.c)
 // Green  = SCL  - GPIO18 (SPI CLK)
 // Yellow = SDA  - GPIO23 (SPI MOSI)
 // Black  = GND
 // Red    = VCC (3.3V)
 
-#define EPAPER_BUSY_PIN   15
+#define EPAPER_BUSY_PIN   4
 #define EPAPER_RST_PIN    22
-#define EPAPER_DC_PIN     17
-#define EPAPER_CS_PIN     16
+#define EPAPER_DC_PIN     2
+#define EPAPER_CS_PIN     12
 
 #define EPAPER_WIDTH  296
 #define EPAPER_HEIGHT 128

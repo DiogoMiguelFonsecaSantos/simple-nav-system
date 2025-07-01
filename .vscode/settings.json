@@ -15,7 +15,9 @@
         "stdbool.h": "c",
         "spi_protocol.h": "c",
         "mpu9250.h": "c",
-        "stdint.h": "c"
+        "stdint.h": "c",
+        "i2c_protocol.h": "c",
+        "lcd16x2_hw.h": "c"
     },
     "idf.pythonInstallPath": "C:\\Espressif\\tools\\idf-python\\3.11.2\\python.exe",
     "idf.espIdfPathWin": "C:/Espressif/frameworks/esp-idf-v5.3.1/",

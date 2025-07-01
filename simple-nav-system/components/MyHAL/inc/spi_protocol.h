@@ -22,7 +22,7 @@
 #define PIN_NUM_MOSI GPIO_NUM_23
 #define PIN_NUM_CLK GPIO_NUM_18
 #define PIN_NUM_CS_MPU GPIO_NUM_5
-#define PIN_NUM_CS_EPAPER GPIO_NUM_16
+#define PIN_NUM_CS_EPAPER GPIO_NUM_12
 
 // Function Prototypes
 esp_err_t SPI_PROTOCOLInit(void);

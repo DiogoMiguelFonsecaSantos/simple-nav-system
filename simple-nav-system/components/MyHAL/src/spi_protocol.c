@@ -44,7 +44,7 @@ esp_err_t SPI_PROTOCOLInit(void) {
 	spi_device_interface_config_t dev_config_epaper = {
 		.clock_speed_hz = SPI_CLOCK_SPEED_HZ,
 		.mode = SPI_MODE,
-		.spics_io_num = PIN_NUM_CS_EPAPER,
+		.spics_io_num = -1,
 		.queue_size = SPI_QUEUE_SIZE,
 	};
 	ret =

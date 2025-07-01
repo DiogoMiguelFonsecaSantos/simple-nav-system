@@ -19,13 +19,17 @@
 //Software Reset: SW Reset (0x12): Send the software-reset command and wait briefly.
 
 void EPAPER_WriteCMD(uint8_t cmd) {
-    gpio_set_level(EPAPER_DC_PIN, 0);
+    gpio_set_level(EPAPER_CS_PIN, 0);      // CS LOW
+    gpio_set_level(EPAPER_DC_PIN, 0);      // Command mode
     SPI_PROTOCOLTransmit_EPAPER_Command(cmd);
+    gpio_set_level(EPAPER_CS_PIN, 1);      // CS HIGH
+    gpio_set_level(EPAPER_DC_PIN, 1);      // Data mode
 }
 
 void EPAPER_WriteData(const uint8_t *data, size_t len) {
-    gpio_set_level(EPAPER_DC_PIN, 1);
+    gpio_set_level(EPAPER_CS_PIN, 0);      // CS LOW
     SPI_PROTOCOLTransmit_EPAPER_Data(data, len);
+    gpio_set_level(EPAPER_CS_PIN, 1);      // CS HIGH
 }
 
 void EPAPER_WaitUntilIdle(void) {
@@ -91,8 +95,10 @@ esp_err_t EPAPER_Init(void) {
     PIN_SetDirection(EPAPER_DC_PIN, OUTPUT);
     PIN_SetDirection(EPAPER_RST_PIN, OUTPUT);
 
+    PIN_SetDirection(EPAPER_DC_PIN, INPUT);
+    
     gpio_set_direction(EPAPER_BUSY_PIN, GPIO_MODE_INPUT);
-
+    gpio_set_level(EPAPER_DC_PIN, 1);      // Data mode
     EPAPER_SetInitConfig();
     EPAPER_SendInitCode();
     EPAPER_LoadWaveformLUT();

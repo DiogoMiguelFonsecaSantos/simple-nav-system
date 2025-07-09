@@ -45,10 +45,66 @@ static bool parse_gpgga(const char *sentence, gps_fix_t *fix) {
     if (i < 10) return false;
 
     if (fields[2] && fields[3] && fields[4] && fields[5] && fields[9]) {
+        // Do NOT parse/store time here!
         fix->latitude = nmea_to_decimal(fields[2], fields[3]);
         fix->longitude = nmea_to_decimal(fields[4], fields[5]);
         fix->altitude_msl = atof(fields[9]);
         fix->fix = (fields[6][0] > '0');
+        return true;
+    }
+    return false;
+}
+
+static bool parse_zda(const char *sentence, gps_fix_t *fix) {
+    // Example: $GPZDA,hhmmss.ss,dd,mm,yyyy,xx,yy*CC
+    char copy[128];
+    strncpy(copy, sentence, sizeof(copy));
+    copy[sizeof(copy)-1] = 0;
+
+    char *fields[8] = {0};
+    char *p = strtok(copy, ",");
+    int i = 0;
+    while (p && i < 8) {
+        fields[i++] = p;
+        p = strtok(NULL, ",");
+    }
+    if (i < 5) return false;
+
+    if (fields[1] && fields[2] && fields[3] && fields[4]) {
+        // Parse hour, add 1 for GMT+1
+        int hour = 0, min = 0, sec = 0;
+        if (strlen(fields[1]) >= 6) {
+            hour = (fields[1][0] - '0') * 10 + (fields[1][1] - '0');
+            min  = (fields[1][2] - '0') * 10 + (fields[1][3] - '0');
+            sec  = (fields[1][4] - '0') * 10 + (fields[1][5] - '0');
+            hour += 1; // GMT+1
+            if (hour >= 24) hour -= 24;
+        }
+        snprintf(fix->timestamp, sizeof(fix->timestamp), "%s-%s-%s %02d:%02d:%02d",
+            fields[4], fields[3], fields[2], hour, min, sec);
+        return true;
+    }
+    return false;
+}
+
+static bool parse_vtg(const char *sentence, gps_fix_t *fix) {
+    // Example: $GPVTG,227.15,T,,M,0.004,N,0.008,K,A*23
+    // Field 1: Track (degrees True)
+    char copy[128];
+    strncpy(copy, sentence, sizeof(copy));
+    copy[sizeof(copy)-1] = 0;
+
+    char *fields[10] = {0};
+    char *p = strtok(copy, ",");
+    int i = 0;
+    while (p && i < 10) {
+        fields[i++] = p;
+        p = strtok(NULL, ",");
+    }
+    if (i < 2) return false;
+
+    if (fields[1]) {
+        fix->heading = atof(fields[1]);
         return true;
     }
     return false;
@@ -66,6 +122,10 @@ bool gps_read_fix(gps_fix_t *fix) {
             nmea_buf[nmea_pos] = 0;
             if (strstr(nmea_buf, "$GPGGA")) {
                 return parse_gpgga(nmea_buf, fix);
+            } else if (strstr(nmea_buf, "$GPVTG")) {
+                parse_vtg(nmea_buf, fix);
+            } else if (strstr(nmea_buf, "$GPZDA")) {
+                parse_zda(nmea_buf, fix);
             }
             nmea_pos = 0;
         } else if (nmea_pos < GPS_UART_BUF_SIZE - 1) {
@@ -74,5 +134,3 @@ bool gps_read_fix(gps_fix_t *fix) {
     }
     return false;
 }
-
-

@@ -26,6 +26,11 @@ void lcd_write_char(char c)
 void lcd_clear(void)
 {
     lcd_command(LCD_CLEAR_DISPLAY);
+
+
+#define LCD_RETURN_HOME 0x02
+
+
 }
 
 void lcd_home(void)
@@ -91,7 +96,7 @@ void lcd_init(void)
     vTaskDelay(pdMS_TO_TICKS(10));
 
     lcd_command(LCD_FUNCTION_SET | LCD_2LINE | LCD_5x8DOTS);
-    lcd_command(LCD_DISPLAY_CONTROL | LCD_DISPLAY_ON | LCD_CURSOR_OFF | LCD_BLINK_OFF);
+    lcd_command(LCD_DISPLAY_CONTROL | LCD_DISPLAY_ON | LCD_CURSOR_ON | LCD_BLINK_ON);
     lcd_clear();
     lcd_command(LCD_ENTRY_MODE_SET | LCD_ENTRY_LEFT);
     lcd_backlight_on();

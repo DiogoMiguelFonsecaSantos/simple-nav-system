@@ -4,11 +4,10 @@ idf_component_register(
          "src/led.c"
          "src/epaper.c"
          "src/gps.c"
-         "src/ring_buffer.c"
-         "src/flash_store.c"
          "src/lcd16x2.c"
          "src/lcd16x2_hw.c"
-         ""
+         "src/storage.c"
+         "src/ring_buffer.c"
     INCLUDE_DIRS "inc"
-    REQUIRES MyHAL MyDRIVERS MyFONTS nvs_flash esp_timer
+    REQUIRES MyHAL MyDRIVERS MyFONTS nvs_flash spiffs esp_timer
 )

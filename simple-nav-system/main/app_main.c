@@ -75,29 +75,6 @@
 
 // void app_main(void) {
 
-//     // my_uart_config_t gps_uart_cfg = {
-//     //     .tx_pin = 17,    // opcional, o GPS não usa
-//     //     .rx_pin = 16,    // ligação física GPS TX → ESP32 GPIO21
-//     //     .baud_rate = 9600
-//     // };
-
-//     // my_uart_init(MY_UART_NUM_2, &gps_uart_cfg);
-
-//     // uint8_t buf[128];
-//     // while (1) {
-//     // int len = my_uart_read_bytes(MY_UART_NUM_2, buf, sizeof(buf) - 1, pdMS_TO_TICKS(1000));
-//     // if (len > 0) {
-//     //     printf("len: %d\n", len);
-//     //     for (int i = 0; i < len; i++) {
-//     //         putchar(buf[i]); // imprime byte a byte
-//     //     }
-//     //     putchar('\n');
-//     // } else {
-//     //     printf("Sem dados do GPS\n");
-//     // }
-
-
-
 //     LED_Init(false);
 // 	// //configLEDS();
 	
@@ -121,206 +98,6 @@
 //     //Set struct sample time to 20 ms
 //     imuData.sample_time = 0.02f; // 20 ms
 
-//     // gpio_set_level(EPAPER_RST_PIN, 0); 
-//     // vTaskDelay(pdMS_TO_TICKS(10));
-//     // gpio_set_level(EPAPER_RST_PIN, 1);
-//     // vTaskDelay(pdMS_TO_TICKS(10));
-
-//     // printf("EPAPER reset done.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // EPAPER_WriteCMD(0x12); // SWRESET command
-//     // printf("EPAPER SWRESET command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-//     // vTaskDelay(pdMS_TO_TICKS(10));
-
-//     // EPAPER_WriteCMD(0x01);
-//     // printf("EPAPER Driver Output Control command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // EPAPER_WriteCMD(0x11);
-//     // printf("EPAPER Data Entry Mode command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val = 0x03;
-//     // EPAPER_WriteData(&val, 1);
-//     // printf("EPAPER Data Entry Mode set to 0x03.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // EPAPER_WriteCMD(0x44);
-//     // printf("EPAPER Set RAM X address start/end command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val1 = 0x00;
-//     // EPAPER_WriteData(&val1, 1);
-//     // printf("EPAPER RAM X address start set to 0x00.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val2 = 0x15;
-//     // EPAPER_WriteData(&val2, 1);
-//     // printf("EPAPER RAM X address end set to 0x15.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // EPAPER_WriteCMD(0x45);
-//     // printf("EPAPER Set RAM Y address start/end command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val3 = 0x00;
-//     // EPAPER_WriteData(&val3, 1);
-//     // printf("EPAPER RAM Y address start set to 0x00.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val4 = 0x00;
-//     // EPAPER_WriteData(&val4, 1);
-//     // printf("EPAPER RAM Y address end set to 0x00.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val5 = 0x27;
-//     // EPAPER_WriteData(&val5, 1);
-//     // printf("EPAPER RAM Y address end set to 0x27.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val6 = 0x01;
-//     // EPAPER_WriteData(&val6, 1);
-//     // printf("EPAPER Set RAM X address start to 0x01.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // EPAPER_WriteCMD(0x3C);
-//     // printf("EPAPER Border Waveform Control command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val7 = 0xC0;
-//     // EPAPER_WriteData(&val7, 1);
-//     // printf("EPAPER Border Waveform Control set to 0xC0.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-
-//     // EPAPER_WriteCMD(0x18);
-//     // printf("EPAPER Temperature Sensor Control command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val8 = 0x48;
-//     // EPAPER_WriteData(&val8, 1);
-//     // printf("EPAPER Temperature Sensor Control set to 0x48.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-
-//     // EPAPER_WriteCMD(0x22);
-//     // printf("EPAPER Display Update Sequence Option command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val9 = 0xFF;
-//     // EPAPER_WriteData(&val9, 1);
-//     // printf("EPAPER Display Update Sequence Option set to 0xFF.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-
-//     // EPAPER_WriteCMD(0x20);
-//     // printf("EPAPER Master Activation command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // while (gpio_get_level(EPAPER_BUSY_PIN) == 1) {
-//     //     vTaskDelay(pdMS_TO_TICKS(10));
-//     // }
-
-//     // EPAPER_WriteCMD(0x4E);
-//     // printf("EPAPER Set RAM X address command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val10 = 0x00;
-//     // EPAPER_WriteData(&val10, 1);
-//     // printf("EPAPER RAM X address set to 0x00.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-
-//     // EPAPER_WriteCMD(0x4F);
-//     // printf("EPAPER Set RAM Y address command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val11 = 0x00;
-//     // EPAPER_WriteData(&val11, 1);
-//     // printf("EPAPER RAM Y address set to 0x00.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val12 = 0x00;
-//     // EPAPER_WriteData(&val12, 1);
-//     // printf("EPAPER RAM Y address set to 0x00.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // EPAPER_WriteCMD(0x24);
-//     // printf("EPAPER Write RAM command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // // Fill the display with black (0x00)
-//     // uint8_t framebuffer[EPAPER_BUFFER_SIZE];
-//     // memset(framebuffer, 0x00, EPAPER_BUFFER_SIZE);
-//     // EPAPER_WriteData(framebuffer, EPAPER_BUFFER_SIZE);
-//     // printf("EPAPER Write RAM data sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // EPAPER_WriteCMD(0x22);
-//     // printf("EPAPER Display Update Sequence Option command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t disp_update = 0xC7;
-//     // EPAPER_WriteData(&disp_update, 1);
-//     // printf("EPAPER Display Update Sequence Option set to 0xC7.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // EPAPER_WriteCMD(0x20);
-//     // printf("EPAPER Master Activation command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // EPAPER_WriteCMD(0x0C);
-//     // printf("EPAPER Booster Soft Start command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-    
-//     // uint8_t val14 = 0x8B;
-//     // EPAPER_WriteData(&val14, 1);
-//     // printf("EPAPER Booster Soft Start set to 0x8B.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val15 = 0x9C;
-//     // EPAPER_WriteData(&val15, 1);
-//     // printf("EPAPER Booster Soft Start set to 0x9C.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val16 = 0x96;
-//     // EPAPER_WriteData(&val16, 1);
-//     // printf("EPAPER Booster Soft Start set to 0x96.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val17 = 0x0F;
-//     // EPAPER_WriteData(&val17, 1);
-//     // printf("EPAPER Booster Soft Start set to 0x0F.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // EPAPER_WriteCMD(0x22);
-//     // printf("EPAPER Display Update Sequence Option command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // uint8_t val18 = 0xC7;
-//     // EPAPER_WriteData(&val18, 1);
-//     // printf("EPAPER Display Update Sequence Option set to 0xC7.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-    
-//     // EPAPER_WriteCMD(0x20);
-//     // printf("EPAPER Master Activation command sent.\n");
-//     // vTaskDelay(pdMS_TO_TICKS(1000));
-
-//     // while (gpio_get_level(EPAPER_BUSY_PIN) == 1) {
-//     //     vTaskDelay(pdMS_TO_TICKS(10));
-//     // }
-
-//     // ----------------------------------------------------------------------------------
-
-//     // // Initialize the e-paper display
-//     // if (EPAPER_Init() != ESP_OK) {
-//     //     ESP_LOGE("MAIN", "Failed to initialize e-paper display");
-//     //     return;
-//     // }
-
-//     // printf("EPAPER initialized successfully.\n");
 
 //     xTaskCreate(&internalBlink, "internalBlink", 2048, NULL, 5, NULL);
 
@@ -380,6 +157,14 @@
 #include "esp_log.h"
 #include "driver/i2c.h"
 #include "rotary_encoder.h"
+#include "gps.h"
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include "storage.h"
+
+#define MAX_SAMPLES 1000
+#define SAMPLE_PERIOD_SEC 4
 
 // void i2c_scan(void) {
 //     ESP_LOGI("I2C_SCAN", "Scanning I2C bus...");
@@ -396,58 +181,194 @@
 //     }
 // }
 
-#define TAG "APP_MAIN"
-
 void app_main(void)
 {
-    ESP_LOGI(TAG, "Initializing I2C...");
-    if (i2c_protocol_init() != ESP_OK) {
-        ESP_LOGE(TAG, "Failed to initialize I2C");
+    ESP_LOGI("MAIN", "Inicializando SPIFFS...");
+    if (!gps_storage_init()) {
+        ESP_LOGE("MAIN", "Falha ao montar SPIFFS!");
         return;
     }
-    
-    ESP_LOGI(TAG, "I2C scan completed. Proceeding with LCD initialization...");
-    ESP_LOGI(TAG, "Initializing LCD...");
-    lcd_init();
+
     rotary_encoder_init();
 
-    ESP_LOGI(TAG, "Writing to LCD...");
-    
-    int32_t last_val = 0;
+    // Print history before writing new sample (apenas 10 para não ocupar stack)
+    gps_sample_t buffer[10];
+    size_t n = gps_storage_read_last(buffer, 10);
+    ESP_LOGI("MAIN", "Histórico encontrado após reboot (%d amostras):", (int)n);
+    for (size_t i = 0; i < n; ++i) {
+        ESP_LOGI("MAIN", "%s, %.6f, %.6f, %.2f, %.2f",
+            buffer[i].timestamp, buffer[i].latitude, buffer[i].longitude, buffer[i].altitude, buffer[i].heading);
+    }
+
+    // Inicializar GPS (ajuste os parâmetros conforme necessário)
+    my_uart_config_t gps_uart_cfg = {
+        .baud_rate = 9600,
+        .tx_pin = 17, // ajuste para o seu hardware
+        .rx_pin = 16  // ajuste para o seu hardware
+    };
+    gps_init(UART_NUM_2, &gps_uart_cfg);
+
+    TickType_t last_sample = xTaskGetTickCount();
 
     while (1) {
-        int32_t val = rotary_encoder_get_value();
-        if (val != last_val) {
-            char buf[17];
-            snprintf(buf, sizeof(buf), "Encoder: %d", (int)val);
-            lcd_clear();
-            lcd_set_cursor(0, 0);
-            lcd_write_string(buf);
-            last_val = val;
+        if (xTaskGetTickCount() - last_sample >= pdMS_TO_TICKS(SAMPLE_PERIOD_SEC * 1000)) {
+            last_sample = xTaskGetTickCount();
+            gps_fix_t fix = {0};
+            if (gps_read_fix(&fix) && fix.fix) {
+                gps_sample_t sample;
+                strncpy(sample.timestamp, fix.timestamp, sizeof(sample.timestamp));
+                sample.timestamp[sizeof(sample.timestamp)-1] = 0;
+                sample.latitude = fix.latitude;
+                sample.longitude = fix.longitude;
+                sample.altitude = fix.altitude_msl;
+                sample.heading = fix.heading; // <-- Store heading
+
+                // --- FILTER LOGIC START ---
+                gps_sample_t last5[5];
+                size_t n5 = gps_storage_read_last(last5, 5);
+                double mean_lat = 0, mean_lon = 0;
+                if (n5 > 0) {
+                    for (size_t i = 0; i < n5; ++i) {
+                        mean_lat += last5[i].latitude;
+                        mean_lon += last5[i].longitude;
+                    }
+                    mean_lat /= n5;
+                    mean_lon /= n5;
+                    if (fabs(sample.latitude - mean_lat) > 0.005 || fabs(sample.longitude - mean_lon) > 0.005) {
+                        ESP_LOGW("MAIN", "GPS sample rejected (jump too large): %.6f, %.6f (mean: %.6f, %.6f)",
+                            sample.latitude, sample.longitude, mean_lat, mean_lon);
+                        continue; // Don't store this sample
+                    }
+                }
+                // --- FILTER LOGIC END ---
+
+                gps_storage_append(&sample);
+                ESP_LOGI("MAIN", "GPS salvo: %s, %.6f, %.6f, %.2f, %.2f",
+                    sample.timestamp, sample.latitude, sample.longitude, sample.altitude, sample.heading);
+            } else {
+                ESP_LOGW("MAIN", "Sem fix válido do GPS.");
+            }
         }
 
-        static int32_t btn_timeout = 0;
+        // Button logic (non-blocking)
         encoder_button_event_t btn = rotary_encoder_get_button();
-        if (btn != BUTTON_NOT_PRESSED) {
-            const char* names[] = {
-            "Button: NOT PRESSED", "Button: CLICKED", "Button: DOUBLE\nCLICKED", "Button: HELD"
-            };
-            lcd_clear();
-            lcd_set_cursor(1, 0);
-            lcd_write_string(names[btn]);
-            btn_timeout = 0; // reset timeout on button event
-        } else {
-            btn_timeout += 50;
-            if (btn_timeout >= 2000) {
-            char buf[17];
-            snprintf(buf, sizeof(buf), "Encoder: %" PRId32, val);
-            lcd_clear();
-            lcd_set_cursor(0, 0);
-            lcd_write_string(buf);
-            btn_timeout = 0;
+        if (btn == BUTTON_CLICKED) {
+            gps_sample_t *history = malloc(sizeof(gps_sample_t) * MAX_SAMPLES);
+            if (!history) {
+                printf("Failed to allocate memory for history!\n");
+            } else {
+                n = gps_storage_read_last(history, MAX_SAMPLES);
+                printf("=== GPS HISTORY (last %d) ===\n", (int)n);
+                for (size_t i = 0; i < n; ++i) {
+                    printf("%4d: %s, %.6f, %.6f, %.2f, %.2f\n",
+                        (int)(i + 1),
+                        history[i].timestamp, history[i].latitude, history[i].longitude, history[i].altitude, history[i].heading);
+                }
+                printf("=== END ===\n");
+                free(history);
+            }
+        } else if (btn == BUTTON_HELD) {
+            if (gps_storage_clear()) {
+                printf("GPS log cleared!\n");
+            } else {
+                printf("Failed to clear GPS log!\n");
             }
         }
 
         vTaskDelay(pdMS_TO_TICKS(50));
     }
 }
+
+    // ESP_LOGI(TAG, "Initializing I2C...");
+    // if (i2c_protocol_init() != ESP_OK) {
+    //     ESP_LOGE(TAG, "Failed to initialize I2C");
+    //     return;
+    // }
+    
+    // ESP_LOGI(TAG, "I2C scan completed. Proceeding with LCD initialization...");
+    // ESP_LOGI(TAG, "Initializing LCD...");
+    // lcd_init();
+    // rotary_encoder_init();
+
+    // ESP_LOGI(TAG, "Writing to LCD...");
+
+    //int32_t last_val = 0;
+
+    // lcd_clear();
+    // lcd_set_cursor(0, 0);
+    // lcd_write_char('D');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+    // lcd_set_cursor(1, 0);
+    // lcd_write_char('I');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+    // lcd_set_cursor(2, 0);
+    // lcd_write_char('O');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+    // lcd_set_cursor(3, 0);
+    // lcd_write_char('G');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+    // lcd_set_cursor(4, 0);
+    // lcd_write_char('O');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+    // lcd_set_cursor(5, 0);
+    // lcd_write_char(' ');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+    // lcd_set_cursor(6, 0);
+    // lcd_write_char('S');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+    // lcd_set_cursor(7, 0);
+    // lcd_write_char('A');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+    // lcd_set_cursor(8, 0);
+    // lcd_write_char('N');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+    // lcd_set_cursor(9, 0);
+    // lcd_write_char('T');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+    // lcd_set_cursor(10, 0);
+    // lcd_write_char('O');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+    // lcd_set_cursor(11, 0);
+    // lcd_write_char('S');
+    // vTaskDelay(pdMS_TO_TICKS(700));
+
+
+    // while (1) {
+    //     int32_t val = rotary_encoder_get_value();
+    //     if (val != last_val) {
+    //         char buf[17];
+    //         if (val % 2 == 0) { // Detect even/odd for formatting
+    //             snprintf(buf, sizeof(buf), "Encoder: %d", (int)val);
+    //         } else {
+    //             snprintf(buf, sizeof(buf), "\nEncoder: %d", (int)val);
+    //         }
+    //         lcd_clear();
+    //         lcd_write_string(buf);
+    //         last_val = val;
+    //     }
+
+    //     static int32_t btn_timeout = 0;
+    //     encoder_button_event_t btn = rotary_encoder_get_button();
+    //     if (btn != BUTTON_NOT_PRESSED) {
+    //         const char* names[] = {
+    //         "Button: NOT PRESSED", "Button: CLICKED", "Button: DOUBLE\nCLICKED", "Button: HELD"
+    //         };
+    //         lcd_clear();
+    //         lcd_set_cursor(1, 0);
+    //         lcd_write_string(names[btn]);
+    //         btn_timeout = 0; // reset timeout on button event
+    //     } else {
+    //         btn_timeout += 50;
+    //         if (btn_timeout >= 2000) {
+    //         char buf[17];
+    //         snprintf(buf, sizeof(buf), "Encoder: %" PRId32, val);
+    //         lcd_clear();
+    //         lcd_set_cursor(0, 0);
+    //         lcd_write_string(buf);
+    //         btn_timeout = 0;
+    //         }
+    //     }
+
+    //     vTaskDelay(pdMS_TO_TICKS(50));
+    // }
+// }

@@ -48,7 +48,7 @@ bool gps_storage_init(void) {
         if (!f) return false;
         meta.head = 0; meta.count = 0;
         fwrite(&meta, sizeof(meta), 1, f);
-        gps_sample_t zero = {0};
+        sample_t zero = {0};
         for (size_t i = 0; i < GPS_RINGBUF_MAX; ++i)
             fwrite(&zero, sizeof(zero), 1, f);
         fflush(f);
@@ -59,15 +59,15 @@ bool gps_storage_init(void) {
     return true;
 }
 
-bool gps_storage_append(const gps_sample_t *sample) {
+bool gps_storage_append(const sample_t *sample) {
     FILE *f = fopen(GPS_RINGBUF_PATH, "rb+");
     if (!f) return false;
     gps_ringbuf_load_meta(f);
 
     // Write sample at head position
-    size_t pos = sizeof(meta) + (meta.head % GPS_RINGBUF_MAX) * sizeof(gps_sample_t);
+    size_t pos = sizeof(meta) + (meta.head % GPS_RINGBUF_MAX) * sizeof(sample_t);
     fseek(f, pos, SEEK_SET);
-    fwrite(sample, sizeof(gps_sample_t), 1, f);
+    fwrite(sample, sizeof(sample_t), 1, f);
 
     // Update meta
     meta.head = (meta.head + 1) % GPS_RINGBUF_MAX;
@@ -78,7 +78,7 @@ bool gps_storage_append(const gps_sample_t *sample) {
     return true;
 }
 
-size_t gps_storage_read_last(gps_sample_t *buffer, size_t max_samples) {
+size_t gps_storage_read_last(sample_t *buffer, size_t max_samples) {
     FILE *f = fopen(GPS_RINGBUF_PATH, "rb");
     if (!f) return 0;
     gps_ringbuf_load_meta(f);
@@ -88,9 +88,9 @@ size_t gps_storage_read_last(gps_sample_t *buffer, size_t max_samples) {
 
     for (size_t i = 0; i < n; ++i) {
         size_t idx = (start + i) % GPS_RINGBUF_MAX;
-        size_t pos = sizeof(meta) + idx * sizeof(gps_sample_t);
+        size_t pos = sizeof(meta) + idx * sizeof(sample_t);
         fseek(f, pos, SEEK_SET);
-        fread(&buffer[i], sizeof(gps_sample_t), 1, f);
+        fread(&buffer[i], sizeof(sample_t), 1, f);
     }
     fclose(f);
     return n;

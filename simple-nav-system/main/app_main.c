@@ -73,86 +73,10 @@
 
 // }
 
-// void app_main(void) {
-
-//     LED_Init(false);
-// 	// //configLEDS();
-	
-//     ESP_LOGI("MAIN", "Starting application...");
-
-//     vTaskDelay(pdMS_TO_TICKS(10));
-
-//     if (SPI_PROTOCOLInit() != ESP_OK) {
-//         ESP_LOGE("MAIN", "Failed to initialize SPI");
-//         return;
-//     }
-
-//     if (MPU9250Init() != ESP_OK) {
-//         ESP_LOGE("MAIN", "Failed to initialize MPU-9250");
-//         return;
-//     }
-
-//     printf("MPU-9250 initialized successfully.\n");
-
-//     mpu9250_data_t imuData = {0}; // Initialize all struct fields to 0
-//     //Set struct sample time to 20 ms
-//     imuData.sample_time = 0.02f; // 20 ms
-
-
-//     xTaskCreate(&internalBlink, "internalBlink", 2048, NULL, 5, NULL);
-
-//     vTaskDelay(pdMS_TO_TICKS(3000));
-
-//     // // Clear the e-paper display
-//     // if (EPAPER_Clear() != ESP_OK) {
-//     //     ESP_LOGE("MAIN", "Failed to clear e-paper display");
-//     //     return;
-//     // }
-
-//     esp_err_t retVal = MPU9250_ReadWhoAmI(&imuData);
-//     if (retVal != ESP_OK) {
-//         printf("Failed to read WHO_AM_I: %d\n", retVal);
-//         return;
-//     }
-
-//     // Read AK8963 WHO_AM_I
-//     uint8_t ak8963_whoami = 0;
-//     retVal = AK8963_ReadWhoAmI(&ak8963_whoami);
-//     if (retVal == ESP_OK) {
-//         printf("AK8963 WHO_AM_I: 0x%02X\n", ak8963_whoami);
-//     } else {
-//         printf("Failed to read AK8963 WHO_AM_I: %d\n", retVal);
-//     }
-
-//     int i = 0;
-//     while (1) {
-
-        
-
-//         retVal = MPU9250ReadAllData(&imuData);
-//         if (retVal != ESP_OK) {
-//             printf("Failed to read sensor data: %d\n", retVal);
-//             continue;
-//         }
-        
-//         if(i < 100){
-//             // Delay for a while before reading again
-//             vTaskDelay(20 / portTICK_PERIOD_MS);
-//             i++;
-//         }
-//         else{
-            
-//             printInfo(&imuData);
-//             i = 0; 
-//         }
-        
-//     }
-
-// }
-
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "i2c_protocol.h"
+#include "mpu9250.h"
 #include "lcd16x2.h"
 #include "esp_log.h"
 #include "driver/i2c.h"
@@ -183,68 +107,120 @@
 
 void app_main(void)
 {
-    ESP_LOGI("MAIN", "Inicializando SPIFFS...");
+    ESP_LOGI("MAIN", "Inicializando SPIFFS..."); 
     if (!gps_storage_init()) {
         ESP_LOGE("MAIN", "Falha ao montar SPIFFS!");
         return;
     }
 
+    // Initialize I2C before using the LCD
+    if (i2c_protocol_init() != ESP_OK) {
+        ESP_LOGE("MAIN", "Failed to initialize I2C");
+        return;
+    }
+
+    // Now it's safe to initialize the LCD
+    lcd_init();
+
     rotary_encoder_init();
 
-    // Print history before writing new sample (apenas 10 para não ocupar stack)
-    gps_sample_t buffer[10];
+    // Print history before writing new sample (only 10 samples to avoid flooding the log)
+    sample_t buffer[10];
     size_t n = gps_storage_read_last(buffer, 10);
     ESP_LOGI("MAIN", "Histórico encontrado após reboot (%d amostras):", (int)n);
     for (size_t i = 0; i < n; ++i) {
-        ESP_LOGI("MAIN", "%s, %.6f, %.6f, %.2f, %.2f",
-            buffer[i].timestamp, buffer[i].latitude, buffer[i].longitude, buffer[i].altitude, buffer[i].heading);
+        const char* dir = (buffer[i].cog != 0.0) ? cog_to_direction(buffer[i].cog) : "";
+        if (dir[0])
+            ESP_LOGI("MAIN", "%s, %.6f, %.6f, %.2f, %.2f (%s)",
+                buffer[i].timestamp, buffer[i].latitude, buffer[i].longitude, buffer[i].altitude, buffer[i].cog, dir);
+        else
+            ESP_LOGI("MAIN", "%s, %.6f, %.6f, %.2f, %.2f",
+                buffer[i].timestamp, buffer[i].latitude, buffer[i].longitude, buffer[i].altitude, buffer[i].cog);
     }
 
-    // Inicializar GPS (ajuste os parâmetros conforme necessário)
     my_uart_config_t gps_uart_cfg = {
         .baud_rate = 9600,
-        .tx_pin = 17, // ajuste para o seu hardware
-        .rx_pin = 16  // ajuste para o seu hardware
+        .tx_pin = 17,
+        .rx_pin = 16
     };
     gps_init(UART_NUM_2, &gps_uart_cfg);
 
+    // --- WAIT FOR VALID DATE FROM ZDA ---
+    ESP_LOGI("MAIN", "Aguardando data válida do GPS (ZDA)...");
+    while (strlen(gps_get_last_date()) == 0) {
+        gps_fix_t fix = {0};
+        gps_read_fix(&fix);
+        vTaskDelay(pdMS_TO_TICKS(100));
+    }
+    ESP_LOGI("MAIN", "Data recebida: %s", gps_get_last_date());
+
     TickType_t last_sample = xTaskGetTickCount();
+    static int accepted_since_boot = 0;
 
     while (1) {
         if (xTaskGetTickCount() - last_sample >= pdMS_TO_TICKS(SAMPLE_PERIOD_SEC * 1000)) {
             last_sample = xTaskGetTickCount();
             gps_fix_t fix = {0};
-            if (gps_read_fix(&fix) && fix.fix) {
-                gps_sample_t sample;
-                strncpy(sample.timestamp, fix.timestamp, sizeof(sample.timestamp));
-                sample.timestamp[sizeof(sample.timestamp)-1] = 0;
+            if (gps_read_fix(&fix) && fix.fix && strlen(fix.timestamp) > 0) {
+                sample_t sample;
+                snprintf(sample.timestamp, sizeof(sample.timestamp), "%.10s %.8s", gps_get_last_date(), fix.timestamp);
                 sample.latitude = fix.latitude;
                 sample.longitude = fix.longitude;
                 sample.altitude = fix.altitude_msl;
-                sample.heading = fix.heading; // <-- Store heading
+                sample.cog = fix.cog;
+                
+                
+
+                // --- REJECT SAMPLES WITH ZERO COORDINATES ---
+                if (sample.latitude == 0.0 || sample.longitude == 0.0) {
+                    ESP_LOGW("MAIN", "Sem fix válido do GPS (zero coordinates).");
+                    continue;
+                }
 
                 // --- FILTER LOGIC START ---
-                gps_sample_t last5[5];
-                size_t n5 = gps_storage_read_last(last5, 5);
-                double mean_lat = 0, mean_lon = 0;
-                if (n5 > 0) {
-                    for (size_t i = 0; i < n5; ++i) {
-                        mean_lat += last5[i].latitude;
-                        mean_lon += last5[i].longitude;
-                    }
-                    mean_lat /= n5;
-                    mean_lon /= n5;
-                    if (fabs(sample.latitude - mean_lat) > 0.005 || fabs(sample.longitude - mean_lon) > 0.005) {
-                        ESP_LOGW("MAIN", "GPS sample rejected (jump too large): %.6f, %.6f (mean: %.6f, %.6f)",
-                            sample.latitude, sample.longitude, mean_lat, mean_lon);
-                        continue; // Don't store this sample
+                if (accepted_since_boot < 10) {
+                    ESP_LOGI("MAIN", "Accepted (boot phase): %.6f, %.6f", sample.latitude, sample.longitude);
+                    accepted_since_boot++;
+                } else {
+                    sample_t last5[5];
+                    size_t n5 = gps_storage_read_last(last5, 5);
+                    double mean_lat = 0, mean_lon = 0;
+                    int valid = 0;
+                    if (n5 > 0) {
+                        for (size_t i = 0; i < n5; ++i) {
+                            ESP_LOGD("MAIN", "last5[%d]: %.6f, %.6f", (int)i, last5[i].latitude, last5[i].longitude);
+                            if (last5[i].latitude != 0.0 && last5[i].longitude != 0.0) {
+                                mean_lat += last5[i].latitude;
+                                mean_lon += last5[i].longitude;
+                                valid++;
+                            }
+                        }
+                        if (valid > 0) {
+                            mean_lat /= valid;
+                            mean_lon /= valid;
+                            ESP_LOGD("MAIN", "Mean from %d valid: %.6f, %.6f", valid, mean_lat, mean_lon);
+                            if (fabs(sample.latitude - mean_lat) > 0.005 || fabs(sample.longitude - mean_lon) > 0.005) {
+                                ESP_LOGW("MAIN", "GPS sample rejected (jump too large): %.6f, %.6f (mean: %.6f, %.6f)",
+                                    sample.latitude, sample.longitude, mean_lat, mean_lon);
+                                continue; // Don't store this sample
+                            } else {
+                                ESP_LOGI("MAIN", "Accepted (filtered): %.6f, %.6f", sample.latitude, sample.longitude);
+                            }
+                        } else {
+                            ESP_LOGI("MAIN", "Accepted (no valid mean): %.6f, %.6f", sample.latitude, sample.longitude);
+                        }
                     }
                 }
                 // --- FILTER LOGIC END ---
 
                 gps_storage_append(&sample);
-                ESP_LOGI("MAIN", "GPS salvo: %s, %.6f, %.6f, %.2f, %.2f",
-                    sample.timestamp, sample.latitude, sample.longitude, sample.altitude, sample.heading);
+                const char* dir = (sample.cog != 0.0) ? cog_to_direction(sample.cog) : "";
+                if (dir[0])
+                    ESP_LOGI("MAIN", "GPS salvo: %s, %.6f, %.6f, %.2f, %.2f (%s)",
+                        sample.timestamp, sample.latitude, sample.longitude, sample.altitude, sample.cog, dir);
+                else
+                    ESP_LOGI("MAIN", "GPS salvo: %s, %.6f, %.6f, %.2f, %.2f",
+                        sample.timestamp, sample.latitude, sample.longitude, sample.altitude, sample.cog);
             } else {
                 ESP_LOGW("MAIN", "Sem fix válido do GPS.");
             }
@@ -253,16 +229,22 @@ void app_main(void)
         // Button logic (non-blocking)
         encoder_button_event_t btn = rotary_encoder_get_button();
         if (btn == BUTTON_CLICKED) {
-            gps_sample_t *history = malloc(sizeof(gps_sample_t) * MAX_SAMPLES);
+            sample_t *history = malloc(sizeof(sample_t) * MAX_SAMPLES);
             if (!history) {
                 printf("Failed to allocate memory for history!\n");
             } else {
                 n = gps_storage_read_last(history, MAX_SAMPLES);
                 printf("=== GPS HISTORY (last %d) ===\n", (int)n);
                 for (size_t i = 0; i < n; ++i) {
-                    printf("%4d: %s, %.6f, %.6f, %.2f, %.2f\n",
-                        (int)(i + 1),
-                        history[i].timestamp, history[i].latitude, history[i].longitude, history[i].altitude, history[i].heading);
+                    const char* dir = (history[i].cog != 0.0) ? cog_to_direction(history[i].cog) : "";
+                    if (dir[0])
+                        printf("%4d: %s, %.6f, %.6f, %.2f, %.2f (%s)\n",
+                            (int)(i + 1),
+                            history[i].timestamp, history[i].latitude, history[i].longitude, history[i].altitude, history[i].cog, dir);
+                    else
+                        printf("%4d: %s, %.6f, %.6f, %.2f, %.2f\n",
+                            (int)(i + 1),
+                            history[i].timestamp, history[i].latitude, history[i].longitude, history[i].altitude, history[i].cog);
                 }
                 printf("=== END ===\n");
                 free(history);
@@ -277,7 +259,7 @@ void app_main(void)
 
         vTaskDelay(pdMS_TO_TICKS(50));
     }
-}
+
 
     // ESP_LOGI(TAG, "Initializing I2C...");
     // if (i2c_protocol_init() != ESP_OK) {
@@ -371,4 +353,4 @@ void app_main(void)
 
     //     vTaskDelay(pdMS_TO_TICKS(50));
     // }
-// }
+ }

@@ -12,16 +12,17 @@
 #include <stdbool.h>
 
 typedef struct {
-    char timestamp[24]; // YYYY-MM-DD HH:MM:SS
+    char timestamp[32]; // YYYY-MM-DD HH:MM:SS + null terminator, extra safety
     double latitude;
     double longitude;
     double altitude_msl;
-    double heading;
-    bool fix;             // true if valid fix
+    double cog;
+    bool fix;
 }  gps_fix_t;
 
 void gps_init(my_uart_port_t uart_num, const my_uart_config_t *cfg);
 bool gps_read_fix(gps_fix_t *fix);
-const char* heading_to_str(double heading);
+const char* cog_to_direction(double cog);
+const char* gps_get_last_date(void);
 
 #endif /* COMPONENTS_MYDRIVERS_INC_GPS_H_ */

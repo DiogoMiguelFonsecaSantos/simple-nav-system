@@ -12,21 +12,21 @@
 #include <stddef.h>
 
 typedef struct {
-    char timestamp[24]; // YYYY-MM-DD HH:MM:SS
+    char timestamp[32]; // YYYY-MM-DD HH:MM:SS + null terminator, extra safety
     double latitude;
     double longitude;
     double altitude;
-    double heading;
-} gps_sample_t;
+    double cog;
+} sample_t;
 
 // Initialize storage (mount SPIFFS and prepare ring buffer file)
 bool gps_storage_init(void);
 
 // Append a sample (overwrites oldest if full)
-bool gps_storage_append(const gps_sample_t *sample);
+bool gps_storage_append(const sample_t *sample);
 
 // Read up to max_samples, oldest first (returns number read)
-size_t gps_storage_read_last(gps_sample_t *buffer, size_t max_samples);
+size_t gps_storage_read_last(sample_t *buffer, size_t max_samples);
 
 // Clear all samples
 bool gps_storage_clear(void);

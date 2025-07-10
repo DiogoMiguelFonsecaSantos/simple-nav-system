@@ -4,19 +4,19 @@
 cmake_minimum_required(VERSION 3.5)
 
 file(MAKE_DIRECTORY
-  "C:/Espressif/frameworks/esp-idf-v5.3.1/components/bootloader/subproject"
-  "C:/SNS/PFC/simple-nav-system/build/bootloader"
-  "C:/SNS/PFC/simple-nav-system/build/bootloader-prefix"
-  "C:/SNS/PFC/simple-nav-system/build/bootloader-prefix/tmp"
-  "C:/SNS/PFC/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp"
-  "C:/SNS/PFC/simple-nav-system/build/bootloader-prefix/src"
-  "C:/SNS/PFC/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp"
+  "A:/Espressif/frameworks/esp-idf-v5.3.1/components/bootloader/subproject"
+  "D:/Workshop/SNS/simple-nav-system/build/bootloader"
+  "D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix"
+  "D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/tmp"
+  "D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp"
+  "D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src"
+  "D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "C:/SNS/PFC/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "C:/SNS/PFC/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "D:/Workshop/SNS/simple-nav-system/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()
